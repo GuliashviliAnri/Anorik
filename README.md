@@ -3,7 +3,8 @@
 Static site (HTML/CSS/JS) on Cloudflare Workers (static assets), with a small Worker for the contact form.
 
 ## Structure
-- `index.html`, `style.css`, `app.js` — the site (EN/KA)
+- `index.html`, `style.css`, `app.js` — the site. `index.html` is the English source; every text has `data-en`/`data-ka`
+- `ka/index.html` — Georgian page, generated. After editing `index.html`, run `python3 tools/build.py` (updates SEO tags in both pages and rebuilds `/ka/`)
 - `src/worker.js` + `src/contact.js` — `POST /api/contact`, sends form inquiries by email via Resend; everything else is served from static assets (`wrangler.jsonc`, `.assetsignore`)
 - `_headers` — security and cache headers
 - `robots.txt`, `sitemap.xml`, `assets/og-image.png` — search and link previews

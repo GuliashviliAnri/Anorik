@@ -1,7 +1,12 @@
 (function(){
 const root=document.getElementById('anorik-refined-studio');
-let language;
-try{const saved=localStorage.getItem('anorik-language');language=saved?(saved==='ka'?'ka':'en'):((navigator.language||'').toLowerCase().startsWith('ka')?'ka':'en')}catch(e){language=(navigator.language||'').toLowerCase().startsWith('ka')?'ka':'en'}
+const language=root.dataset.language==='ka'?'ka':'en';
+// First visit from a Georgian-language browser: open the Georgian page.
+(function(){let saved=null;try{saved=localStorage.getItem('anorik-language')}catch(e){}
+ if(!saved&&language==='en'&&location.pathname==='/'&&(navigator.language||'').toLowerCase().startsWith('ka')){location.replace('/ka/'+location.hash);}})();
+root.querySelectorAll('[data-language-button]').forEach(a=>a.addEventListener('click',e=>{
+ try{localStorage.setItem('anorik-language',a.dataset.languageButton)}catch(err){}
+ e.preventDefault();location.href=a.getAttribute('href')+location.hash;}));
 
 const goals={
  en:[
@@ -47,16 +52,7 @@ tabs.forEach(b=>{
 document.getElementById('x-plan-cta').addEventListener('click',()=>pickKind(goals[language][goal].kind));
 root.querySelectorAll('[data-pick-kind]').forEach(a=>a.addEventListener('click',()=>pickKind(a.dataset.pickKind)));
 
-function renderLocale(){
- document.documentElement.lang=language;root.dataset.language=language;root.lang=language;
- try{localStorage.setItem('anorik-language',language)}catch(e){}
- root.querySelectorAll('[data-en]').forEach(el=>{const v=el.dataset[language];if(el.tagName==='H1'||el.childElementCount===0)el.innerHTML=v;});
- root.querySelectorAll('[data-placeholder-en]').forEach(el=>el.placeholder=el.dataset[language==='en'?'placeholderEn':'placeholderKa']);
- root.querySelectorAll('[data-language-button]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.languageButton===language)));
- if(!status.hidden&&status.dataset.key)status.innerHTML=formText[language][status.dataset.key];
- renderGoal(false);
-}
-root.querySelectorAll('[data-language-button]').forEach(b=>b.addEventListener('click',()=>{language=b.dataset.languageButton;renderLocale();}));
+
 
 // highlight the section in view
 const navLinks=[...root.querySelectorAll('.x-nav a,.x-nav-mobile a')];
@@ -84,5 +80,5 @@ form.addEventListener('submit',async e=>{
  finally{sending=false;button.disabled=false;}
 });
 
-renderLocale();updateNav();
+renderGoal(false);updateNav();
 })();

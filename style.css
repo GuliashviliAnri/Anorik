@@ -358,3 +358,6 @@ body{margin:0}
   #anorik-refined-studio .x-project-top{flex-wrap:wrap;gap:6px}
   #anorik-refined-studio .x-project h3{font-size:21px}
 }
+#anorik-refined-studio .x-locale a{display:grid;place-items:center;border-radius:999px;min-width:40px;min-height:36px;padding:0 8px;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none}
+#anorik-refined-studio .x-locale a[aria-current]{background:var(--wine);color:#fff}
+#anorik-refined-studio .x-locale a:not([aria-current]):hover{color:var(--wine)}

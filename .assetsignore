@@ -4,6 +4,7 @@
 node_modules
 .wrangler
 src
+tools
 wrangler.jsonc
 README.md
 .DS_Store
