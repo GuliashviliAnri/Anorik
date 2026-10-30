@@ -1,7 +1,7 @@
-// Cloudflare Pages Function: POST /api/contact
+// POST /api/contact — called from src/worker.js
 // Sends the project inquiry from the website form to the studio inbox via Resend.
 //
-// Required environment variables (Cloudflare → Pages project → Settings → Variables and Secrets):
+// Required environment variables (Cloudflare → Workers & Pages → anorik → Settings → Variables and Secrets):
 //   RESEND_API_KEY  — secret, from resend.com (domain anorik.com must be verified there)
 //   CONTACT_TO      — where inquiries are delivered, e.g. contact@anorik.com
 // Optional:
@@ -27,9 +27,9 @@ function originAllowed(request) {
   const origin = request.headers.get('origin');
   if (!origin) return false;
   if (ALLOWED_ORIGINS.includes(origin)) return true;
-  // Cloudflare Pages preview deployments
+  // workers.dev preview URLs
   try {
-    return new URL(origin).hostname.endsWith('.pages.dev');
+    return new URL(origin).hostname.endsWith('.workers.dev');
   } catch {
     return false;
   }
@@ -102,6 +102,3 @@ export async function onRequestPost({ request, env }) {
   return json({ ok: true });
 }
 
-export function onRequest() {
-  return json({ ok: false, error: 'method_not_allowed' }, 405);
-}
