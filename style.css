@@ -271,3 +271,7 @@ body{margin:0}
   #anorik-refined-studio .x-steps{grid-template-columns:1fr 1fr;gap:20px 16px}
   #anorik-refined-studio .x-steps li:before{font-size:30px}
 }
+#anorik-refined-studio ul.x-contact-direct{display:grid;gap:10px;margin-top:28px}
+#anorik-refined-studio ul.x-contact-direct li{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:baseline;font-size:16px}
+#anorik-refined-studio ul.x-contact-direct li>span{color:var(--muted);font-size:15px}
+#anorik-refined-studio ul.x-contact-direct a{color:var(--wine);font-weight:600;text-underline-offset:4px}
