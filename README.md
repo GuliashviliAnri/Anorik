@@ -11,9 +11,7 @@ Static site (HTML/CSS/JS) on Cloudflare Workers (static assets), with a small Wo
 ## Contact form setup
 1. Create an account at resend.com, add the domain `anorik.com` and add the DNS records it shows in Cloudflare DNS (they don't affect Email Routing).
 2. Create an API key in Resend.
-3. Cloudflare → Workers & Pages → anorik → Settings → Variables and Secrets (Production):
-   - `RESEND_API_KEY` — the key (type: Secret)
-   - `CONTACT_TO` — inbox that receives inquiries, e.g. `contact@anorik.com`
-4. Redeploy. Replying to an inquiry email goes straight to the client (reply-to is set).
+3. Cloudflare → Workers & Pages → anorik → Settings → Variables and Secrets (Production): add `RESEND_API_KEY` as a **Secret**. Plain-text variables set in the dashboard are overwritten by each deploy from Git, so `CONTACT_TO` lives in `wrangler.jsonc` under `vars`.
+4. Deploy. Replying to an inquiry email goes straight to the client (reply-to is set).
 
 If the function isn't configured, the form shows an error with the contact email, so no inquiry is silently lost.
