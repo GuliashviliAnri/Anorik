@@ -227,3 +227,47 @@ body{margin:0}
   html{scroll-behavior:auto}
   #anorik-refined-studio *{animation:none!important;transition:none!important}
 }
+
+/* compact pass: less scrolling */
+#anorik-refined-studio .x-hero{padding:40px 0 64px}
+#anorik-refined-studio h1{font-size:clamp(42px,5.4vw,76px)}
+#anorik-refined-studio .x-lede{margin-top:20px}
+#anorik-refined-studio .x-actions{margin-top:28px}
+#anorik-refined-studio .x-byline{margin-top:28px}
+#anorik-refined-studio .x-picker{padding:26px}
+#anorik-refined-studio .x-picker h2{font-size:21px}
+#anorik-refined-studio .x-picker-tabs{margin-top:16px;gap:6px}
+#anorik-refined-studio .x-picker-tabs button{padding:11px 16px;font-size:15px}
+#anorik-refined-studio .x-picker-panel{margin-top:18px;padding-top:18px}
+#anorik-refined-studio .x-plan{gap:10px;margin-bottom:18px}
+#anorik-refined-studio .x-plan li{font-size:15px}
+#anorik-refined-studio .x-case,#anorik-refined-studio .x-about,#anorik-refined-studio .x-process{padding:64px 0}
+#anorik-refined-studio .x-services{padding:72px 0 56px}
+#anorik-refined-studio .x-contact{padding:64px 0 72px}
+#anorik-refined-studio .x-case-shot{margin-top:32px}
+#anorik-refined-studio .x-browser img{max-height:440px;object-fit:cover;object-position:top}
+#anorik-refined-studio .x-case-facts{margin-top:36px;gap:32px}
+#anorik-refined-studio .x-case-facts dt{font-size:18px;margin-bottom:6px}
+#anorik-refined-studio .x-case-facts dd{font-size:15px;line-height:1.65}
+#anorik-refined-studio .x-case-foot{margin-top:36px;padding-top:24px}
+#anorik-refined-studio .x-service-list{margin-top:32px}
+#anorik-refined-studio .x-service-list li{padding:20px 0}
+#anorik-refined-studio .x-service-list h3{font-size:clamp(20px,1.8vw,24px)}
+#anorik-refined-studio .x-about-grid{gap:48px}
+#anorik-refined-studio .x-about-text{margin-top:20px;font-size:17px}
+#anorik-refined-studio .x-about-points{gap:20px}
+#anorik-refined-studio .x-steps{margin-top:32px;gap:24px}
+#anorik-refined-studio .x-steps li{padding-top:16px}
+#anorik-refined-studio .x-steps li:before{font-size:36px;margin-bottom:10px}
+#anorik-refined-studio .x-steps h3{font-size:19px}
+#anorik-refined-studio .x-steps p{font-size:15px}
+#anorik-refined-studio .x-contact-grid{gap:48px}
+#anorik-refined-studio .x-form{gap:18px}
+#anorik-refined-studio .x-form textarea{min-height:110px}
+@media(max-width:600px){
+  #anorik-refined-studio .x-hero{padding:24px 0 48px}
+  #anorik-refined-studio .x-case,#anorik-refined-studio .x-services,#anorik-refined-studio .x-about,#anorik-refined-studio .x-process,#anorik-refined-studio .x-contact{padding:48px 0}
+  #anorik-refined-studio .x-browser img{max-height:260px}
+  #anorik-refined-studio .x-steps{grid-template-columns:1fr 1fr;gap:20px 16px}
+  #anorik-refined-studio .x-steps li:before{font-size:30px}
+}

@@ -1,25 +1,25 @@
 (function(){
 const root=document.getElementById('anorik-refined-studio');
 let language;
-try{language=localStorage.getItem('anorik-language')==='ka'?'ka':'en'}catch(e){language='en'}
+try{const saved=localStorage.getItem('anorik-language');language=saved?(saved==='ka'?'ka':'en'):((navigator.language||'').toLowerCase().startsWith('ka')?'ka':'en')}catch(e){language=(navigator.language||'').toLowerCase().startsWith('ka')?'ka':'en'}
 
 const goals={
  en:[
-  {plan:['Find where visitors drop off today and what stops them from contacting you.','Rewrite the offer and structure pages around the questions customers actually ask.','Make every page end in one clear next step — call, form or booking — and measure it.'],cta:'Plan more inquiries with us',kind:'Redesign'},
+  {plan:['Find where visitors drop off today and what stops them from contacting you.','Rewrite the offer and structure pages around the questions customers actually ask.','End every page with one clear next step, like a call, form or booking, and measure the results.'],cta:'Plan more inquiries with us',kind:'Redesign'},
   {plan:['Map the repetitive work: inquiries, orders, reports, copy-pasting between tools.','Connect your tools so data moves on its own, with an admin panel for what’s left.','Hand off routine follow-ups to automations and AI agents with clear rules.'],cta:'Plan the automation with us',kind:'Automation'},
   {plan:['Review your current site against the businesses you compete with.','Design a clear, distinctive site that reflects the quality of your work.','Build it fast and easy to update, so it stays current after launch.'],cta:'Plan the new site with us',kind:'New website'}
  ],
  ka:[
-  {plan:['ვარკვევთ, სად ტოვებენ ვიზიტორები საიტს და რა უშლით ხელს დაგიკავშირდნენ.','ვწერთ შეთავაზებას და ვაწყობთ გვერდებს იმ კითხვების მიხედვით, რასაც მომხმარებლები რეალურად სვამენ.','ყოველი გვერდი მთავრდება ერთი გასაგები ნაბიჯით — ზარი, ფორმა ან ჯავშანი — და ვზომავთ შედეგს.'],cta:'დავგეგმოთ მეტი მოთხოვნა',kind:'Redesign'},
-  {plan:['ვაღწერთ განმეორებად სამუშაოს: მოთხოვნები, შეკვეთები, ანგარიშები, ინსტრუმენტებს შორის კოპირება.','ვაკავშირებთ შენს ინსტრუმენტებს, რომ მონაცემები თავად მოძრაობდეს, დანარჩენისთვის კი — ადმინპანელი.','რუტინულ კომუნიკაციას ავტომატიზაციასა და AI აგენტებს გადავცემთ მკაფიო წესებით.'],cta:'დავგეგმოთ ავტომატიზაცია',kind:'Automation'},
+  {plan:['ვარკვევთ, სად ტოვებენ ვიზიტორები საიტს და რა უშლით ხელს დაგიკავშირდნენ.','ვწერთ შეთავაზებას და ვაწყობთ გვერდებს იმ კითხვების მიხედვით, რასაც მომხმარებლები რეალურად სვამენ.','ყოველ გვერდს ვასრულებთ ერთი გასაგები ნაბიჯით (ზარი, ფორმა ან ჯავშანი) და ვზომავთ შედეგს.'],cta:'დავგეგმოთ მეტი მოთხოვნა',kind:'Redesign'},
+  {plan:['ვაღწერთ განმეორებად სამუშაოს: მოთხოვნები, შეკვეთები, ანგარიშები, ინსტრუმენტებს შორის კოპირება.','ვაკავშირებთ შენს ინსტრუმენტებს, რომ მონაცემები თავად მოძრაობდეს, დანარჩენისთვის კი ადმინპანელს ვქმნით.','რუტინულ კომუნიკაციას ავტომატიზაციასა და AI აგენტებს გადავცემთ მკაფიო წესებით.'],cta:'დავგეგმოთ ავტომატიზაცია',kind:'Automation'},
   {plan:['ვაფასებთ შენს ამჟამინდელ საიტს კონკურენტებთან შედარებით.','ვქმნით მკაფიო, გამორჩეულ დიზაინს, რომელიც შენი სამუშაოს ხარისხს ასახავს.','ვაწყობთ სწრაფად და მარტივად სამართავად, რომ გაშვების შემდეგაც აქტუალური დარჩეს.'],cta:'დავგეგმოთ ახალი საიტი',kind:'New website'}
  ]
 };
 let goal=0;
 
 const formText={
- en:{sending:'Sending your inquiry…',sent:'Thank you — your inquiry has been sent. We’ll reply to your email shortly.',failed:'Your inquiry couldn’t be sent. Please email us at <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'Please add your name, a valid email and a few words about your project.'},
- ka:{sending:'მოთხოვნა იგზავნება…',sent:'გმადლობთ — მოთხოვნა გაიგზავნა. მალე გიპასუხებთ ელფოსტაზე.',failed:'მოთხოვნა ვერ გაიგზავნა. მოგვწერე პირდაპირ: <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'მიუთითე სახელი, სწორი ელფოსტა და რამდენიმე სიტყვა პროექტზე.'}
+ en:{sending:'Sending your inquiry…',sent:'Thank you, your inquiry has been sent. We’ll reply to your email shortly.',failed:'Your inquiry couldn’t be sent. Please email us at <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'Please add your name, a valid email and a few words about your project.'},
+ ka:{sending:'მოთხოვნა იგზავნება…',sent:'გმადლობთ, მოთხოვნა გაიგზავნა. მალე გიპასუხებთ ელფოსტაზე.',failed:'მოთხოვნა ვერ გაიგზავნა. მოგვწერე პირდაპირ: <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'მიუთითე სახელი, სწორი ელფოსტა და რამდენიმე სიტყვა პროექტზე.'}
 };
 
 const form=document.getElementById('al-inquiry-form');
