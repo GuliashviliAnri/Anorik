@@ -1,55 +1,88 @@
-
 (function(){
 const root=document.getElementById('anorik-refined-studio');
-const images={"home": "assets/project-ac85b511f7.webp", "catalog": "assets/project-e945e91689.webp"};
-let language=localStorage.getItem('anorik-language')==='ka'?'ka':'en',project=null,stepStage=0;
-const words={en:{titles:{web:'Product catalog',systems:'Business workflow',automation:'Automation workflow',support:'Maintenance checklist'},stages:['New','In progress','Done'],flow:['Receive request','Check information','Connect systems'],noProducts:'No products selected',selected:'Selected: ',products:{'საბაღე სკამი':'Garden bench','აუკუბა':'Aucuba'},status:'Status: ',checked:'Checked ',kind:{'ახალი ვებსაიტი':'a new website','ვებსაიტის რედიზაინი':'a website redesign','ბიზნესსისტემა':'a business system','მოვლა და მხარდაჭერა':'website maintenance and support','ავტომატიზაცია':'business process automation','უფასო აუდიტი':'a free review of my current website'},features:{'პროდუქტების კატალოგი':'product catalog','ადმინპანელი':'admin panel','ინტეგრაციები':'integrations'},need:'I need ',withFeatures:' Features: ',undefinedFeatures:' Let’s define the features together.',projects:{lbloom:['Lbloom','Complete website design and development, including the product catalog, content tools and administration.'],adswikia:['Adswikia','An earlier website redesign. The site was redesigned again in 2026; today’s design is different from my work.'],newuni:['NewUni','A university website redesign currently in progress.'],jibu:['Jibu','An active project in the ANORIK portfolio. Work is ongoing.']},steps:[['Discover','Understand your business and what your customers need.','messages-square'],['Plan','Define the structure, features and scope of the project.','layout-list'],['Design & build','Create the design, develop the product and test it.','panels-top-left'],['Launch & improve','Launch the project and plan the next improvements.','rocket']]},ka:{titles:{web:'პროდუქტის კატალოგი',systems:'ბიზნესსისტემის მართვა',automation:'ავტომატიზაციის პროცესი',support:'მოვლა და მხარდაჭერა'},stages:['ახალი','მუშავდება','დასრულებული'],flow:['მოთხოვნის მიღება','მონაცემების შემოწმება','სისტემაში გადაცემა'],noProducts:'პროდუქტი არჩეული არ არის',selected:'არჩეულია: ',products:{'საბაღე სკამი':'საბაღე სკამი','აუკუბა':'აუკუბა'},status:'სტატუსი: ',checked:'შემოწმებულია ',kind:{'ახალი ვებსაიტი':'ახალი ვებსაიტი','ვებსაიტის რედიზაინი':'ვებსაიტის რედიზაინი','ბიზნესსისტემა':'ბიზნესსისტემა','მოვლა და მხარდაჭერა':'ვებსაიტის მოვლა და მხარდაჭერა','ავტომატიზაცია':'ბიზნესპროცესის ავტომატიზაცია','უფასო აუდიტი':'ჩემი არსებული საიტის უფასო აუდიტი'},features:{'პროდუქტების კატალოგი':'პროდუქტების კატალოგი','ადმინპანელი':'ადმინპანელი','ინტეგრაციები':'ინტეგრაციები'},need:'მინდა ',withFeatures:' მჭირდება: ',undefinedFeatures:' ფუნქციებს ერთად დავაზუსტებთ.',projects:{lbloom:['Lbloom','სრულად შესრულებული ვებსაიტის დიზაინი და დეველოპმენტი — პროდუქტების კატალოგით, კონტენტის მართვითა და ადმინისტრირებით.'],adswikia:['Adswikia','ჩემ მიერ შესრულებული წინა რედიზაინი. 2026 წელს საიტი ხელახლა განაახლეს; დღევანდელი დიზაინი ჩემს ნამუშევარს არ წარმოადგენს.'],newuni:['NewUni','უნივერსიტეტის ვებსაიტის რედიზაინი, რომელზეც მუშაობა ამჟამად მიმდინარეობს.'],jibu:['Jibu','ANORIK-ის პორტფოლიოში შემავალი აქტიური პროექტი. მუშაობა გრძელდება.']},steps:[['გაცნობა','ვიგებთ, რა სჭირდება შენს ბიზნესს და მომხმარებელს.','messages-square'],['დაგეგმვა','ვაზუსტებთ სტრუქტურას, ფუნქციებსა და სამუშაოს მოცულობას.','layout-list'],['დიზაინი და შექმნა','ვაერთიანებთ დიზაინს, დეველოპმენტსა და ტესტირებას.','panels-top-left'],['გაშვება და განვითარება','ვუშვებთ პროექტს და ვგეგმავთ შემდგომ გაუმჯობესებებს.','rocket']]}};
-const icons=()=>{if(window.lucide)lucide.createIcons({attrs:{width:18,height:18}})};
-function updateBrief(){const w=words[language],kind=w.kind[root.querySelector('input[name=al-kind]:checked').value];const features=[...root.querySelectorAll('input[name=al-feature]:checked')].map(el=>w.features[el.value]);root.querySelector('#al-brief-output').textContent=w.need+kind+'.'+(features.length?w.withFeatures+features.join(', ')+'.':w.undefinedFeatures);}
+let language;
+try{language=localStorage.getItem('anorik-language')==='ka'?'ka':'en'}catch(e){language='en'}
 
-function updateProject(){const detail=root.querySelector('#al-project-detail');if(!project){detail.hidden=true;return}detail.hidden=false;const p=words[language].projects[project];detail.innerHTML='<div><strong>'+p[0]+'</strong><p>'+p[1]+'</p></div>'+(project==='lbloom'?'<img src="'+images.catalog+'" alt="'+(language==='en'?'Actual Lbloom product catalog':'Lbloom-ის რეალური კატალოგი')+'">':'');}
-function updateStep(){const s=words[language].steps[stepStage];root.querySelector('#al-step-title').textContent=s[0];root.querySelector('#al-step-text').textContent=s[1];root.querySelector('#al-step-icon').innerHTML='<i data-lucide="'+s[2]+'" aria-hidden="true"></i>';icons();}
-function renderLocale(){document.documentElement.lang=language;localStorage.setItem('anorik-language',language);root.dataset.language=language;root.lang=language;root.querySelectorAll('[data-placeholder-en]').forEach(el=>el.placeholder=el.dataset[language==='en'?'placeholderEn':'placeholderKa']);root.querySelector('.al-nav').setAttribute('aria-label',language==='en'?'Main navigation':'მთავარი ნავიგაცია');root.querySelectorAll('[data-en]').forEach(el=>el.innerHTML=el.dataset[language]);root.querySelectorAll('[data-language-button]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.languageButton===language)));updateBrief();updateProject();updateStep();}
-root.querySelectorAll('[data-language-button]').forEach(button=>button.addEventListener('click',()=>{language=button.dataset.languageButton;renderLocale()}));
-root.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{project=project===button.dataset.project?null:button.dataset.project;root.querySelectorAll('[data-project]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.project===project)));updateProject()}));
-root.querySelectorAll('[data-step]').forEach(button=>button.addEventListener('click',()=>{stepStage=Number(button.dataset.step);root.querySelectorAll('[data-step]').forEach(el=>el.setAttribute('aria-pressed',String(el===button)));updateStep()}));
-root.querySelectorAll('input[name=al-kind],input[name=al-feature]').forEach(input=>input.addEventListener('change',updateBrief));
-root.querySelectorAll('[data-review-offer]').forEach(link=>link.addEventListener('click',()=>{root.querySelector('input[name=al-kind][value="უფასო აუდიტი"]').checked=true;updateBrief();}));
-root.querySelectorAll('[data-service-choice]').forEach(button=>button.addEventListener('click',()=>{root.querySelector('input[name=al-kind][value="'+button.dataset.serviceChoice+'"]').checked=true;updateBrief();root.querySelector('#al-brief').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});}));
-// Follow the section in view; an underline is never pinned to the first link.
-const navLinks=[...root.querySelectorAll('.al-nav a')];
-const sectionTargets=['al-work','al-services','al-about','al-process','al-brief'].map(id=>document.getElementById(id));
-let navFrame=0;
-function updateNavigation(){navFrame=0;let current=null;const marker=Math.min(120,window.innerHeight*.2);sectionTargets.forEach(section=>{if(section.getBoundingClientRect().top<=marker)current=section.id});navLinks.forEach(link=>{if(link.hash==='#'+current)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')});}
-function queueNavigation(){if(!navFrame)navFrame=requestAnimationFrame(updateNavigation);}
-window.addEventListener('scroll',queueNavigation,{passive:true});window.addEventListener('resize',queueNavigation);window.addEventListener('load',queueNavigation);updateNavigation();
-const inquiryForm=root.querySelector('#al-inquiry-form');
-const kindKeys={'ახალი ვებსაიტი':'New website','ვებსაიტის რედიზაინი':'Redesign','ბიზნესსისტემა':'Business system','ავტომატიზაცია':'Automation','მოვლა და მხარდაჭერა':'Maintenance & support','უფასო აუდიტი':'Free website review'};
-const featureKeys={'პროდუქტების კატალოგი':'Product catalog','ადმინპანელი':'Admin panel','ინტეგრაციები':'Integrations'};
-const formText={
- en:{sending:'Sending…',sent:'Thank you — your inquiry has been sent. We’ll reply to your email shortly.',failed:'Something went wrong and your inquiry was not sent. Please email us at <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'Please check your name, email and project description.'},
- ka:{sending:'იგზავნება…',sent:'გმადლობთ — მოთხოვნა გაიგზავნა. მალე გიპასუხებთ ელფოსტაზე.',failed:'მოთხოვნა ვერ გაიგზავნა. გთხოვთ, მოგვწერეთ პირდაპირ: <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'გთხოვთ, შეამოწმეთ სახელი, ელფოსტა და პროექტის აღწერა.'}
+const goals={
+ en:[
+  {plan:['Find where visitors drop off today and what stops them from contacting you.','Rewrite the offer and structure pages around the questions customers actually ask.','Make every page end in one clear next step — call, form or booking — and measure it.'],cta:'Plan more inquiries with us',kind:'Redesign'},
+  {plan:['Map the repetitive work: inquiries, orders, reports, copy-pasting between tools.','Connect your tools so data moves on its own, with an admin panel for what’s left.','Hand off routine follow-ups to automations and AI agents with clear rules.'],cta:'Plan the automation with us',kind:'Automation'},
+  {plan:['Review your current site against the businesses you compete with.','Design a clear, distinctive site that reflects the quality of your work.','Build it fast and easy to update, so it stays current after launch.'],cta:'Plan the new site with us',kind:'New website'}
+ ],
+ ka:[
+  {plan:['ვარკვევთ, სად ტოვებენ ვიზიტორები საიტს და რა უშლით ხელს დაგიკავშირდნენ.','ვწერთ შეთავაზებას და ვაწყობთ გვერდებს იმ კითხვების მიხედვით, რასაც მომხმარებლები რეალურად სვამენ.','ყოველი გვერდი მთავრდება ერთი გასაგები ნაბიჯით — ზარი, ფორმა ან ჯავშანი — და ვზომავთ შედეგს.'],cta:'დავგეგმოთ მეტი მოთხოვნა',kind:'Redesign'},
+  {plan:['ვაღწერთ განმეორებად სამუშაოს: მოთხოვნები, შეკვეთები, ანგარიშები, ინსტრუმენტებს შორის კოპირება.','ვაკავშირებთ შენს ინსტრუმენტებს, რომ მონაცემები თავად მოძრაობდეს, დანარჩენისთვის კი — ადმინპანელი.','რუტინულ კომუნიკაციას ავტომატიზაციასა და AI აგენტებს გადავცემთ მკაფიო წესებით.'],cta:'დავგეგმოთ ავტომატიზაცია',kind:'Automation'},
+  {plan:['ვაფასებთ შენს ამჟამინდელ საიტს კონკურენტებთან შედარებით.','ვქმნით მკაფიო, გამორჩეულ დიზაინს, რომელიც შენი სამუშაოს ხარისხს ასახავს.','ვაწყობთ სწრაფად და მარტივად სამართავად, რომ გაშვების შემდეგაც აქტუალური დარჩეს.'],cta:'დავგეგმოთ ახალი საიტი',kind:'New website'}
+ ]
 };
+let goal=0;
+
+const formText={
+ en:{sending:'Sending your inquiry…',sent:'Thank you — your inquiry has been sent. We’ll reply to your email shortly.',failed:'Your inquiry couldn’t be sent. Please email us at <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'Please add your name, a valid email and a few words about your project.'},
+ ka:{sending:'მოთხოვნა იგზავნება…',sent:'გმადლობთ — მოთხოვნა გაიგზავნა. მალე გიპასუხებთ ელფოსტაზე.',failed:'მოთხოვნა ვერ გაიგზავნა. მოგვწერე პირდაპირ: <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'მიუთითე სახელი, სწორი ელფოსტა და რამდენიმე სიტყვა პროექტზე.'}
+};
+
+const form=document.getElementById('al-inquiry-form');
+const status=document.getElementById('al-inquiry-status');
+function pickKind(kind){const input=form.querySelector('input[name=kind][value="'+kind.replace(/"/g,'\\"')+'"]');if(input)input.checked=true;}
+
+function renderGoal(animate){
+ const g=goals[language][goal];
+ const list=document.getElementById('x-plan');
+ list.classList.remove('is-new');
+ list.innerHTML=g.plan.map(t=>'<li>'+t+'</li>').join('');
+ if(animate){void list.offsetWidth;list.classList.add('is-new');}
+ document.getElementById('x-plan-cta-text').textContent=g.cta;
+ root.querySelectorAll('[data-goal]').forEach(b=>{const on=Number(b.dataset.goal)===goal;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
+ document.getElementById('goal-panel').setAttribute('aria-labelledby','goal-tab-'+goal);
+}
+const tabs=[...root.querySelectorAll('[data-goal]')];
+tabs.forEach(b=>{
+ b.addEventListener('click',()=>{goal=Number(b.dataset.goal);renderGoal(true);});
+ b.addEventListener('keydown',e=>{
+  const d=e.key==='ArrowDown'||e.key==='ArrowRight'?1:e.key==='ArrowUp'||e.key==='ArrowLeft'?-1:0;
+  if(!d)return;e.preventDefault();goal=(goal+d+tabs.length)%tabs.length;renderGoal(true);tabs[goal].focus();
+ });
+});
+document.getElementById('x-plan-cta').addEventListener('click',()=>pickKind(goals[language][goal].kind));
+root.querySelectorAll('[data-pick-kind]').forEach(a=>a.addEventListener('click',()=>pickKind(a.dataset.pickKind)));
+
+function renderLocale(){
+ document.documentElement.lang=language;root.dataset.language=language;root.lang=language;
+ try{localStorage.setItem('anorik-language',language)}catch(e){}
+ root.querySelectorAll('[data-en]').forEach(el=>{const v=el.dataset[language];if(el.tagName==='H1'||el.childElementCount===0)el.innerHTML=v;});
+ root.querySelectorAll('[data-placeholder-en]').forEach(el=>el.placeholder=el.dataset[language==='en'?'placeholderEn':'placeholderKa']);
+ root.querySelectorAll('[data-language-button]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.languageButton===language)));
+ if(!status.hidden&&status.dataset.key)status.innerHTML=formText[language][status.dataset.key];
+ renderGoal(false);
+}
+root.querySelectorAll('[data-language-button]').forEach(b=>b.addEventListener('click',()=>{language=b.dataset.languageButton;renderLocale();}));
+
+// highlight the section in view
+const navLinks=[...root.querySelectorAll('.x-nav a')];
+const sections=navLinks.map(a=>document.querySelector(a.hash));
+let frame=0;
+function updateNav(){frame=0;let current=null;const mark=window.innerHeight*.3;sections.forEach(s=>{if(s&&s.getBoundingClientRect().top<=mark)current=s.id;});navLinks.forEach(a=>{if(a.hash==='#'+current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
+window.addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(updateNav)},{passive:true});
+
 let sending=false;
-inquiryForm.addEventListener('submit',async event=>{
- event.preventDefault();
- if(sending||!inquiryForm.reportValidity())return;
- const data=new FormData(inquiryForm);
- const status=root.querySelector('#al-inquiry-status');
- const button=inquiryForm.querySelector('button[type=submit]');
- const t=()=>formText[language];
- const show=(key,state)=>{status.hidden=false;status.dataset.state=state;status.innerHTML=t()[key];};
+function show(key,state){status.hidden=false;status.dataset.state=state;status.dataset.key=key;status.innerHTML=formText[language][key];}
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(sending)return;
+ if(!form.checkValidity()){show('invalid','error');form.querySelector(':invalid').focus();return;}
+ const data=new FormData(form);
+ const button=form.querySelector('button[type=submit]');
  sending=true;button.disabled=true;show('sending','pending');
  try{
   const res=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
-   name:data.get('name'),email:data.get('email'),message:data.get('message'),website:data.get('website'),language,
-   kind:kindKeys[data.get('al-kind')],features:data.getAll('al-feature').map(f=>featureKeys[f]).filter(Boolean)
+   name:data.get('name'),email:data.get('email'),message:data.get('message'),website:data.get('website'),language,kind:data.get('kind'),features:[]
   })});
-  if(res.ok){show('sent','success');inquiryForm.reset();updateBrief();}
+  if(res.ok){show('sent','success');form.reset();}
   else show(res.status===422?'invalid':'failed','error');
- }catch(e){show('failed','error');}
+ }catch(err){show('failed','error');}
  finally{sending=false;button.disabled=false;}
 });
 
-renderLocale();
+renderLocale();updateNav();
 })();
