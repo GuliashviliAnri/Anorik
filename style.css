@@ -262,3 +262,13 @@
 #anorik-refined-studio .al-footer .al-logo .al-brand-descriptor{letter-spacing:2.8px;padding-left:2.8px}
 @media(max-width:520px){#anorik-refined-studio .al-logo .al-brand-name{font-size:29px;line-height:30px;gap:1px}#anorik-refined-studio .al-logo .al-brand-descriptor{letter-spacing:3.5px;padding-left:3.5px}#anorik-refined-studio .al-footer .al-logo .al-brand-name{font-size:25px;line-height:27px}}
 @media(max-width:360px){#anorik-refined-studio .al-logo .al-brand-name{font-size:27px;line-height:28px}}
+/* Contact form delivery + footer info */
+#anorik-refined-studio .al-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+#anorik-refined-studio .al-contact-submit a,#anorik-refined-studio #al-inquiry-status a{text-decoration:underline;text-underline-offset:3px}
+#anorik-refined-studio .al-btn:disabled{opacity:.65;cursor:progress}
+#anorik-refined-studio #al-inquiry-status{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:15px;line-height:1.7;border:1px solid #e0e7d9;background:#f6f8f2;color:#46643b}
+#anorik-refined-studio #al-inquiry-status[data-state=success]{background:#eaf3e0;border-color:#a9c48f;color:#2f4d28}
+#anorik-refined-studio #al-inquiry-status[data-state=error]{background:#fbefec;border-color:#e5b9ad;color:#8a3b2a}
+#anorik-refined-studio .al-footer-info{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:flex-end}
+#anorik-refined-studio .al-footer-info a:hover{color:var(--al-green);text-decoration:underline;text-underline-offset:3px}
+@media(max-width:520px){#anorik-refined-studio .al-footer-info{justify-content:flex-start;gap:8px 16px}}

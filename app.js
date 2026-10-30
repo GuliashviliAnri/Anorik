@@ -23,14 +23,31 @@ function updateNavigation(){navFrame=0;let current=null;const marker=Math.min(12
 function queueNavigation(){if(!navFrame)navFrame=requestAnimationFrame(updateNavigation);}
 window.addEventListener('scroll',queueNavigation,{passive:true});window.addEventListener('resize',queueNavigation);window.addEventListener('load',queueNavigation);updateNavigation();
 const inquiryForm=root.querySelector('#al-inquiry-form');
-inquiryForm.addEventListener('submit',event=>{
+const kindKeys={'ახალი ვებსაიტი':'New website','ვებსაიტის რედიზაინი':'Redesign','ბიზნესსისტემა':'Business system','ავტომატიზაცია':'Automation','მოვლა და მხარდაჭერა':'Maintenance & support'};
+const featureKeys={'პროდუქტების კატალოგი':'Product catalog','ადმინპანელი':'Admin panel','ინტეგრაციები':'Integrations'};
+const formText={
+ en:{sending:'Sending…',sent:'Thank you — your inquiry has been sent. We’ll reply to your email shortly.',failed:'Something went wrong and your inquiry was not sent. Please email us at <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'Please check your name, email and project description.'},
+ ka:{sending:'იგზავნება…',sent:'გმადლობთ — მოთხოვნა გაიგზავნა. მალე გიპასუხებთ ელფოსტაზე.',failed:'მოთხოვნა ვერ გაიგზავნა. გთხოვთ, მოგვწერეთ პირდაპირ: <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'გთხოვთ, შეამოწმეთ სახელი, ელფოსტა და პროექტის აღწერა.'}
+};
+let sending=false;
+inquiryForm.addEventListener('submit',async event=>{
  event.preventDefault();
- if(!inquiryForm.reportValidity())return;
+ if(sending||!inquiryForm.reportValidity())return;
  const data=new FormData(inquiryForm);
- const text=['ANORIK STUDIO — PROJECT INQUIRY','', (language==='en'?'Name: ':'სახელი: ')+data.get('name'),(language==='en'?'Email: ':'ელფოსტა: ')+data.get('email'),'',root.querySelector('#al-brief-output').textContent,'',data.get('message')].join('\n');
- const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
- const link=document.createElement('a');link.href=url;link.download='anorik-project-inquiry.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
- const status=root.querySelector('#al-inquiry-status');status.hidden=false;status.textContent=language==='en'?'Your inquiry file is ready. Email delivery is not connected yet; this request has not been sent.':'მოთხოვნის ფაილი მზადაა. ელფოსტა ჯერ მიერთებული არ არის — მოთხოვნა არ გაგზავნილა.';
+ const status=root.querySelector('#al-inquiry-status');
+ const button=inquiryForm.querySelector('button[type=submit]');
+ const t=()=>formText[language];
+ const show=(key,state)=>{status.hidden=false;status.dataset.state=state;status.innerHTML=t()[key];};
+ sending=true;button.disabled=true;show('sending','pending');
+ try{
+  const res=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
+   name:data.get('name'),email:data.get('email'),message:data.get('message'),website:data.get('website'),language,
+   kind:kindKeys[data.get('al-kind')],features:data.getAll('al-feature').map(f=>featureKeys[f]).filter(Boolean)
+  })});
+  if(res.ok){show('sent','success');inquiryForm.reset();updateBrief();}
+  else show(res.status===422?'invalid':'failed','error');
+ }catch(e){show('failed','error');}
+ finally{sending=false;button.disabled=false;}
 });
 
 renderLocale();
