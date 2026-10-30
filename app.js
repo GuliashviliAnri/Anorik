@@ -59,8 +59,8 @@ function renderLocale(){
 root.querySelectorAll('[data-language-button]').forEach(b=>b.addEventListener('click',()=>{language=b.dataset.languageButton;renderLocale();}));
 
 // highlight the section in view
-const navLinks=[...root.querySelectorAll('.x-nav a')];
-const sections=navLinks.map(a=>document.querySelector(a.hash));
+const navLinks=[...root.querySelectorAll('.x-nav a,.x-nav-mobile a')];
+const sections=[...new Set(navLinks.map(a=>a.hash))].map(h=>document.querySelector(h));
 let frame=0;
 function updateNav(){frame=0;let current=null;const mark=window.innerHeight*.3;sections.forEach(s=>{if(s&&s.getBoundingClientRect().top<=mark)current=s.id;});navLinks.forEach(a=>{if(a.hash==='#'+current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
 window.addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(updateNav)},{passive:true});
