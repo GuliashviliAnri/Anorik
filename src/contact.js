@@ -9,7 +9,7 @@
 
 const ALLOWED_ORIGINS = ['https://anorik.com', 'https://www.anorik.com'];
 
-const KINDS = new Set(['New website', 'Redesign', 'Business system', 'Automation', 'Maintenance & support']);
+const KINDS = new Set(['New website', 'Redesign', 'Business system', 'Automation', 'Maintenance & support', 'Free website review']);
 const FEATURES = new Set(['Product catalog', 'Admin panel', 'Integrations']);
 
 const json = (body, status = 200) =>

@@ -272,3 +272,28 @@
 #anorik-refined-studio .al-footer-info{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:flex-end}
 #anorik-refined-studio .al-footer-info a:hover{color:var(--al-green);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:520px){#anorik-refined-studio .al-footer-info{justify-content:flex-start;gap:8px 16px}}
+/* Portfolio: featured project */
+#anorik-refined-studio .al-work-label:after{content:'03'}
+#anorik-refined-studio .al-work-card.al-work-featured{grid-column:1/-1}
+#anorik-refined-studio .al-work-featured .al-work-art{height:210px}
+#anorik-refined-studio .al-work-featured .al-work-art.botanical img{height:100%}
+#anorik-refined-studio .al-work-status.live{color:var(--al-green)}
+/* Case study */
+#anorik-refined-studio .al-case{display:grid;grid-template-columns:1fr 1.1fr;gap:32px;align-items:center;margin:8px 0 40px;padding:28px;background:var(--al-white);border:1px solid var(--al-line);border-radius:18px}
+#anorik-refined-studio .al-case-media img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--al-line)}
+#anorik-refined-studio .al-case h2{font-size:28px;line-height:1.25;letter-spacing:-.6px;margin-bottom:20px}
+#anorik-refined-studio .al-case-points{margin:0 0 22px;display:grid;gap:16px}
+#anorik-refined-studio .al-case-points dt{font-size:13px;font-weight:600;letter-spacing:.3px;color:var(--al-green);margin-bottom:4px}
+#anorik-refined-studio .al-case-points dd{margin:0;font-size:15px;line-height:1.7;color:var(--al-text)}
+#anorik-refined-studio .al-case .al-btn{width:auto}
+/* Founder */
+#anorik-refined-studio .al-about{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:36px 0 8px;padding:28px;background:var(--al-warm);border-radius:18px}
+#anorik-refined-studio .al-about h2{font-size:28px;line-height:1.25;letter-spacing:-.6px;margin-bottom:16px}
+#anorik-refined-studio .al-about-intro>p:last-child{font-size:15px;line-height:1.8;color:var(--al-text)}
+#anorik-refined-studio .al-about-points{list-style:none;margin:0;padding:0;display:grid;gap:14px;align-content:center}
+#anorik-refined-studio .al-about-points li{display:flex;gap:14px;align-items:flex-start;background:var(--al-white);border:1px solid var(--al-line);border-radius:12px;padding:16px;font-size:15px;line-height:1.65;color:var(--al-text)}
+#anorik-refined-studio .al-about-points svg{width:20px;height:20px;flex-shrink:0;margin-top:3px;color:var(--al-green)}
+#anorik-refined-studio .al-about-points strong{color:var(--al-ink);font-weight:600}
+#anorik-refined-studio[data-language=ka] .al-case h2,#anorik-refined-studio[data-language=ka] .al-about h2{font-size:24px;letter-spacing:-.2px;line-height:1.4}
+@media(max-width:860px){#anorik-refined-studio .al-case,#anorik-refined-studio .al-about{grid-template-columns:1fr;gap:22px;padding:22px}}
+@media(max-width:520px){#anorik-refined-studio .al-work-featured .al-work-art{height:150px}#anorik-refined-studio .al-case h2,#anorik-refined-studio .al-about h2{font-size:23px}#anorik-refined-studio .al-case,#anorik-refined-studio .al-about{padding:20px 16px}#anorik-refined-studio .al-case .al-btn{width:100%}}
