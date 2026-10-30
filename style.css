@@ -361,3 +361,22 @@ body{margin:0}
 #anorik-refined-studio .x-locale a{display:grid;place-items:center;border-radius:999px;min-width:40px;min-height:36px;padding:0 8px;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none}
 #anorik-refined-studio .x-locale a[aria-current]{background:var(--wine);color:#fff}
 #anorik-refined-studio .x-locale a:not([aria-current]):hover{color:var(--wine)}
+
+/* simplify pass: shorter page */
+#anorik-refined-studio .x-avatar{display:none}
+#anorik-refined-studio .x-byline{margin-top:24px}
+#anorik-refined-studio h1{max-width:13.5ch}
+#anorik-refined-studio .x-project-art{height:112px}
+#anorik-refined-studio .x-project-art span{font-size:92px}
+@media(min-width:981px){
+  #anorik-refined-studio .x-case .x-wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-areas:"head shot" "facts shot" "foot shot";column-gap:56px;align-items:start}
+  #anorik-refined-studio .x-case-head{grid-area:head}
+  #anorik-refined-studio .x-case h2{font-size:clamp(28px,2.6vw,38px);max-width:none}
+  #anorik-refined-studio .x-case-shot{grid-area:shot;margin-top:0;align-self:center}
+  #anorik-refined-studio .x-browser img{max-height:none}
+  #anorik-refined-studio .x-case-facts{grid-area:facts;grid-template-columns:1fr;gap:18px;margin-top:28px}
+  #anorik-refined-studio .x-case-facts dt{font-size:16px;margin-bottom:4px}
+  #anorik-refined-studio .x-case-facts dd{font-size:15px;line-height:1.6}
+  #anorik-refined-studio .x-case-foot{grid-area:foot;margin-top:24px;padding-top:0;border-top:0}
+  #anorik-refined-studio .x-case{padding:56px 0}
+}
