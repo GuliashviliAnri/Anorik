@@ -6,7 +6,11 @@ const language=root.dataset.language==='ka'?'ka':'en';
  if(!saved&&language==='en'&&location.pathname==='/'&&(navigator.language||'').toLowerCase().startsWith('ka')){location.replace('/ka/'+location.hash);}})();
 root.querySelectorAll('[data-language-button]').forEach(a=>a.addEventListener('click',e=>{
  try{localStorage.setItem('anorik-language',a.dataset.languageButton)}catch(err){}
- e.preventDefault();location.href=a.getAttribute('href')+location.hash;}));
+ e.preventDefault();
+ // Keep the visitor on the section they are actually looking at, not a stale #hash from an earlier click.
+ let target='';
+ if(window.scrollY>300){const mark=window.innerHeight*.3;document.querySelectorAll('main section[id]').forEach(s=>{if(s.getBoundingClientRect().top<=mark)target='#'+s.id;});}
+ location.href=a.getAttribute('href')+target;}));
 
 const formText={
  en:{sending:'Sending…',sent:'Thank you, it’s on its way. We’ll reply to your email within one business day.',failed:'Your message couldn’t be sent. Please email us at <a href="mailto:contact@anorik.com">contact@anorik.com</a> or write on <a href="https://wa.me/995574240286" target="_blank" rel="noopener noreferrer">WhatsApp</a>.',invalid:'Please add your name, a valid email and a few words about your website or project.',review:'Please review my website: '},
