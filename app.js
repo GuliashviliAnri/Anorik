@@ -8,51 +8,27 @@ root.querySelectorAll('[data-language-button]').forEach(a=>a.addEventListener('c
  try{localStorage.setItem('anorik-language',a.dataset.languageButton)}catch(err){}
  e.preventDefault();location.href=a.getAttribute('href')+location.hash;}));
 
-const goals={
- en:[
-  {plan:['Find where visitors drop off today and what stops them from contacting you.','Rewrite the offer and structure pages around the questions customers actually ask.','End every page with one clear next step, like a call, form or booking, and measure the results.'],cta:'Plan more inquiries with us',kind:'Redesign'},
-  {plan:['Map the repetitive work: inquiries, orders, reports, copy-pasting between tools.','Connect your tools so data moves on its own, with an admin panel for what’s left.','Hand off routine follow-ups to automations and AI agents with clear rules.'],cta:'Plan the automation with us',kind:'Automation'},
-  {plan:['Review your current site against the businesses you compete with.','Design a clear, distinctive site that reflects the quality of your work.','Build it fast and easy to update, so it stays current after launch.'],cta:'Plan the new site with us',kind:'New website'}
- ],
- ka:[
-  {plan:['ვარკვევთ, სად ტოვებენ ვიზიტორები საიტს და რა უშლით ხელს დაგიკავშირდნენ.','ვწერთ შეთავაზებას და ვაწყობთ გვერდებს იმ კითხვების მიხედვით, რასაც მომხმარებლები რეალურად სვამენ.','ყოველ გვერდს ვასრულებთ ერთი გასაგები ნაბიჯით (ზარი, ფორმა ან ჯავშანი) და ვზომავთ შედეგს.'],cta:'დავგეგმოთ მეტი მოთხოვნა',kind:'Redesign'},
-  {plan:['ვაღწერთ განმეორებად სამუშაოს: მოთხოვნები, შეკვეთები, ანგარიშები, ინსტრუმენტებს შორის კოპირება.','ვაკავშირებთ შენს ინსტრუმენტებს, რომ მონაცემები თავად მოძრაობდეს, დანარჩენისთვის კი ადმინპანელს ვქმნით.','რუტინულ კომუნიკაციას ავტომატიზაციასა და AI აგენტებს გადავცემთ მკაფიო წესებით.'],cta:'დავგეგმოთ ავტომატიზაცია',kind:'Automation'},
-  {plan:['ვაფასებთ შენს ამჟამინდელ საიტს კონკურენტებთან შედარებით.','ვქმნით მკაფიო, გამორჩეულ დიზაინს, რომელიც შენი სამუშაოს ხარისხს ასახავს.','ვაწყობთ სწრაფად და მარტივად სამართავად, რომ გაშვების შემდეგაც აქტუალური დარჩეს.'],cta:'დავგეგმოთ ახალი საიტი',kind:'New website'}
- ]
-};
-let goal=0;
-
 const formText={
- en:{sending:'Sending your inquiry…',sent:'Thank you, your inquiry has been sent. We’ll reply to your email shortly.',failed:'Your inquiry couldn’t be sent. Please email us at <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'Please add your name, a valid email and a few words about your project.'},
- ka:{sending:'მოთხოვნა იგზავნება…',sent:'გმადლობთ, მოთხოვნა გაიგზავნა. მალე გიპასუხებთ ელფოსტაზე.',failed:'მოთხოვნა ვერ გაიგზავნა. მოგვწერე პირდაპირ: <a href="mailto:contact@anorik.com">contact@anorik.com</a>.',invalid:'მიუთითე სახელი, სწორი ელფოსტა და რამდენიმე სიტყვა პროექტზე.'}
+ en:{sending:'Sending…',sent:'Thank you, it’s on its way. We’ll reply to your email within one business day.',failed:'Your message couldn’t be sent. Please email us at <a href="mailto:contact@anorik.com">contact@anorik.com</a> or write on <a href="https://wa.me/995574240286" target="_blank" rel="noopener noreferrer">WhatsApp</a>.',invalid:'Please add your name, a valid email and a few words about your website or project.',review:'Please review my website: '},
+ ka:{sending:'იგზავნება…',sent:'გმადლობთ, გაიგზავნა. ერთ სამუშაო დღეში გიპასუხებთ ელფოსტაზე.',failed:'შეტყობინება ვერ გაიგზავნა. მოგვწერე პირდაპირ: <a href="mailto:contact@anorik.com">contact@anorik.com</a> ან <a href="https://wa.me/995574240286" target="_blank" rel="noopener noreferrer">WhatsApp-ში</a>.',invalid:'მიუთითე სახელი, სწორი ელფოსტა და რამდენიმე სიტყვა შენს საიტზე ან პროექტზე.',review:'გთხოვთ, შეამოწმოთ ჩემი საიტი: '}
 };
 
 const form=document.getElementById('al-inquiry-form');
 const status=document.getElementById('al-inquiry-status');
+const message=document.getElementById('al-message');
 function pickKind(kind){const input=form.querySelector('input[name=kind][value="'+kind.replace(/"/g,'\\"')+'"]');if(input)input.checked=true;}
-
-function renderGoal(animate){
- const g=goals[language][goal];
- const list=document.getElementById('x-plan');
- list.classList.remove('is-new');
- list.innerHTML=g.plan.map(t=>'<li>'+t+'</li>').join('');
- if(animate){void list.offsetWidth;list.classList.add('is-new');}
- document.getElementById('x-plan-cta-text').textContent=g.cta;
- root.querySelectorAll('[data-goal]').forEach(b=>{const on=Number(b.dataset.goal)===goal;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
- document.getElementById('goal-panel').setAttribute('aria-labelledby','goal-tab-'+goal);
-}
-const tabs=[...root.querySelectorAll('[data-goal]')];
-tabs.forEach(b=>{
- b.addEventListener('click',()=>{goal=Number(b.dataset.goal);renderGoal(true);});
- b.addEventListener('keydown',e=>{
-  const d=e.key==='ArrowDown'||e.key==='ArrowRight'?1:e.key==='ArrowUp'||e.key==='ArrowLeft'?-1:0;
-  if(!d)return;e.preventDefault();goal=(goal+d+tabs.length)%tabs.length;renderGoal(true);tabs[goal].focus();
- });
-});
-document.getElementById('x-plan-cta').addEventListener('click',()=>pickKind(goals[language][goal].kind));
 root.querySelectorAll('[data-pick-kind]').forEach(a=>a.addEventListener('click',()=>pickKind(a.dataset.pickKind)));
 
-
+// Hero review card: carry the website address into the contact form.
+const review=document.getElementById('x-review');
+if(review){review.addEventListener('submit',e=>{
+ e.preventDefault();
+ const url=document.getElementById('x-review-url').value.trim();
+ pickKind('Free website review');
+ if(url&&!message.value.includes(url))message.value=formText[language].review+url+(message.value?'\n'+message.value:'');
+ document.getElementById('contact').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+ setTimeout(()=>document.getElementById('al-name').focus({preventScroll:true}),400);
+});}
 
 // highlight the section in view
 const navLinks=[...root.querySelectorAll('.x-nav a,.x-nav-mobile a')];
@@ -80,5 +56,5 @@ form.addEventListener('submit',async e=>{
  finally{sending=false;button.disabled=false;}
 });
 
-renderGoal(false);updateNav();
+updateNav();
 })();

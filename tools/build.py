@@ -20,27 +20,27 @@ LINKEDIN = "https://www.linkedin.com/in/anri-guliashvili-5b4673323/"
 META = {
     "en": {
         "url": f"{SITE}/",
-        "title": "ANORIK Studio | Web Design, Development & AI Automation in Tbilisi",
-        "description": "Websites, online stores, business systems and AI automation for growing companies. A Tbilisi-based design and development studio working with clients worldwide.",
-        "og_title": "ANORIK Studio | Websites and systems that grow your business",
-        "og_description": "Design, development and automation from a studio that thinks like a marketer. Based in Tbilisi, working worldwide.",
+        "title": "ANORIK Studio | Websites That Bring Customers, Tbilisi",
+        "description": "Websites and online stores for shops, showrooms and local service businesses, built to bring calls, messages and visits. Get a free website review. Tbilisi, working worldwide.",
+        "og_title": "ANORIK Studio | Websites that bring customers to your business",
+        "og_description": "Websites and marketing for shops, showrooms and local businesses. Get a free review of your website.",
         "locale": "en_US",
         "alt_locale": "ka_GE",
     },
     "ka": {
         "url": f"{SITE}/ka/",
         "title": "ვებსაიტის დამზადება თბილისში | ANORIK Studio",
-        "description": "ვებსაიტების, ონლაინ მაღაზიების, ბიზნესსისტემებისა და AI ავტომატიზაციის შექმნა. დიზაინისა და დეველოპმენტის სტუდია თბილისში, მარკეტინგული ხედვით.",
-        "og_title": "ANORIK Studio | ვებსაიტები და სისტემები, რომლებიც ბიზნესს ზრდის",
-        "og_description": "დიზაინი, დეველოპმენტი და ავტომატიზაცია სტუდიისგან, რომელიც მარკეტოლოგივით ფიქრობს. თბილისი, მთელი მსოფლიოსთვის.",
+        "description": "ვებსაიტები და ონლაინ მაღაზიები მაღაზიებისთვის, შოურუმებისა და მომსახურების ბიზნესებისთვის, რომლებიც ზარებს, მესიჯებსა და ვიზიტებს მოიტანს. მიიღე საიტის უფასო აუდიტი.",
+        "og_title": "ANORIK Studio | საიტები, რომლებიც ბიზნესს მომხმარებლებს მოუყვანს",
+        "og_description": "საიტები და მარკეტინგი მაღაზიებისთვის, შოურუმებისა და ადგილობრივი ბიზნესებისთვის. მიიღე საიტის უფასო აუდიტი.",
         "locale": "ka_GE",
         "alt_locale": "en_US",
     },
 }
 
 SERVICES = {
-    "en": ["Website design and development", "Online stores", "Business systems and admin panels", "AI agents and business automation", "Website maintenance and improvements"],
-    "ka": ["ვებსაიტის დიზაინი და დეველოპმენტი", "ონლაინ მაღაზიები", "ბიზნესსისტემები და ადმინპანელები", "AI აგენტები და ბიზნესის ავტომატიზაცია", "ვებსაიტის მოვლა და გაუმჯობესება"],
+    "en": ["Website design and development", "Online stores", "Launch and marketing setup", "Business systems and admin panels", "AI agents and business automation", "Website maintenance and improvements"],
+    "ka": ["ვებსაიტის დიზაინი და დეველოპმენტი", "ონლაინ მაღაზიები", "გაშვება და მარკეტინგი", "ბიზნესსისტემები და ადმინპანელები", "AI აგენტები და ბიზნესის ავტომატიზაცია", "ვებსაიტის მოვლა და გაუმჯობესება"],
 }
 
 FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700"
