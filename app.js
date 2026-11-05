@@ -82,7 +82,7 @@ io.observe(sec.querySelector('.x-chart'));
 (function(){
  const root=document.getElementById('anorik-refined-studio');
  if(!root||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
- const sel='.x-proof>div,.x-section-title,.x-stats-head,.x-chart,.x-stats-more,.x-case-head,.x-case-shot,.x-case-facts>div,.x-case-foot,.x-for-list>li,.x-for-note,.x-service-list>li,.x-project,.x-about-text,.x-about-points>div,.x-steps>li,.x-faq-list,.x-contact-intro,.x-form';
+ const sel='.x-proof>div,.x-section-title,.x-stats-head,.x-chart,.x-stats-more,.x-case-head,.x-case-facts>div,.x-case-foot,.x-for-list>li,.x-for-note,.x-service-list>li,.x-project,.x-about-text,.x-about-points>div,.x-faq-list,.x-contact-intro,.x-form';
  const items=[...root.querySelectorAll(sel)].filter(el=>!el.closest('.x-stats-head')||el.classList.contains('x-stats-head'));
  items.forEach(el=>{
   const sibs=[...el.parentElement.children].filter(c=>items.includes(c));
@@ -103,5 +103,61 @@ io.observe(sec.querySelector('.x-chart'));
  const root=document.getElementById('anorik-refined-studio');const acts=root&&root.querySelector('.x-hero .x-actions');
  if(!acts)return;let f=0;
  function upd(){f=0;root.classList.toggle('x-bar-hidden',acts.getBoundingClientRect().bottom>0);}
+ addEventListener('scroll',()=>{if(!f)f=requestAnimationFrame(upd)},{passive:true});upd();
+})();
+
+// ===== Scroll-driven motion (Apple style) =====
+(function(){
+ const root=document.getElementById('anorik-refined-studio');
+ if(!root||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ root.classList.add('x-motion');
+ const clamp=v=>Math.max(0,Math.min(1,v));
+ const ease=t=>1-Math.pow(1-t,3);
+ function words(el,cls){
+  const t=el.textContent.trim().split(/\s+/);el.textContent='';
+  return t.map((w,i)=>{const s=document.createElement('span');s.className=cls;s.textContent=w;s.style.setProperty('--wi',i);el.appendChild(s);if(i<t.length-1)el.appendChild(document.createTextNode(' '));return s;});
+ }
+ // 1. Hero headline: words sharpen into place one by one.
+ const h1=root.querySelector('.x-hero h1');
+ if(h1){h1.setAttribute('aria-label',h1.textContent.trim());words(h1,'x-w');h1.classList.add('x-words');}
+ // 2. Case study screenshot grows to full size as it scrolls in.
+ const shot=root.querySelector('.x-case-shot');
+ // 3. About statement lights up word by word while scrolling.
+ const about=root.querySelector('.x-about-text');const aw=about?words(about,'x-aw'):[];
+ // 4. Process: a progress line fills and each step lights up in turn.
+ const steps=root.querySelector('.x-steps');const stepItems=steps?[...steps.children]:[];
+ const heroCopy=root.querySelector('.x-hero-copy');
+ let f=0;
+ function tick(){
+  f=0;const vh=innerHeight;
+  if(heroCopy){const p=clamp(scrollY/(vh*.9));heroCopy.style.setProperty('--hp',p.toFixed(3));}
+  if(shot){const r=shot.getBoundingClientRect();const p=ease(clamp((vh-r.top)/(vh*.85)));shot.style.setProperty('--sp',p.toFixed(3));}
+  if(aw.length){const r=about.getBoundingClientRect();const p=clamp((vh*.85-r.top)/(r.height+vh*.35));const n=Math.round(p*aw.length);aw.forEach((w,i)=>w.classList.toggle('on',i<n));}
+  if(steps){const r=steps.getBoundingClientRect();const p=clamp((vh*.8-r.top)/(r.height*.9+vh*.25));steps.style.setProperty('--pp',p.toFixed(3));stepItems.forEach((li,i)=>li.classList.toggle('on',p>=(i+.35)/stepItems.length));}
+ }
+ addEventListener('scroll',()=>{if(!f)f=requestAnimationFrame(tick)},{passive:true});
+ addEventListener('resize',()=>{if(!f)f=requestAnimationFrame(tick)});tick();
+ // 5. Big numbers count up when they appear.
+ root.querySelectorAll('.x-proof dt').forEach(dt=>{
+  const m=dt.textContent.trim().match(/^(\d+)(\D.*)$/);if(!m||+m[1]<10)return;
+  const end=+m[1],suf=m[2];dt.textContent='0'+suf;
+  const io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io.disconnect();const t0=performance.now();
+   (function step(t){const k=Math.min(1,(t-t0)/1400);dt.textContent=Math.round(end*ease(k))+suf;if(k<1)requestAnimationFrame(step);})(t0);},{threshold:.6});
+  io.observe(dt);
+ });
+ // 6. Cards: soft wine spotlight follows the pointer.
+ if(matchMedia('(pointer:fine)').matches){
+  root.querySelectorAll('.x-service-list>li,.x-for-list>li,.x-steps>li,.x-about-points>div,.x-project').forEach(c=>{
+   c.classList.add('x-spot');
+   c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');});
+  });
+ }
+})();
+
+// Header turns dark while it sits over a black section.
+(function(){
+ const root=document.getElementById('anorik-refined-studio');const head=root&&root.querySelector('.x-head');
+ if(!head)return;const dark=[...root.querySelectorAll('.x-case,.x-about')];let f=0;
+ function upd(){f=0;const y=head.getBoundingClientRect().bottom-4;root.classList.toggle('x-head-dark',dark.some(s=>{const r=s.getBoundingClientRect();return r.top<=y&&r.bottom>y;}));}
  addEventListener('scroll',()=>{if(!f)f=requestAnimationFrame(upd)},{passive:true});upd();
 })();
