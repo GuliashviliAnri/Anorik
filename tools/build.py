@@ -43,8 +43,8 @@ SERVICES = {
     "ka": ["ვებსაიტის დიზაინი და დეველოპმენტი", "ონლაინ მაღაზიები", "გაშვება და მარკეტინგი", "ბიზნესსისტემები და ადმინპანელები", "AI აგენტები და ბიზნესის ავტომატიზაცია", "ვებსაიტის მოვლა და გაუმჯობესება"],
 }
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700"
-         "&family=Hanken+Grotesk:wght@400;500;600&family=Inter:wght@500;600&family=Cinzel+Decorative:wght@700"
+FONTS = ("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700"
+         "&family=Cinzel+Decorative:wght@700"
          "&family=Marcellus&family=Cormorant+SC:wght@600&family=Forum&family=Prata&family=Cinzel:wght@500&display=swap")
 
 
@@ -90,7 +90,7 @@ def schema(lang):
 def head(lang, prefix):
     m = META[lang]
     e = lambda s: html.escape(s, quote=True)
-    return f"""<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f2f1ee">
+    return f"""<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff">
 <title>{e(m['title'])}</title>
 <meta name="description" content="{e(m['description'])}">
 <link rel="canonical" href="{m['url']}">

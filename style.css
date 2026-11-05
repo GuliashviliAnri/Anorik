@@ -511,3 +511,301 @@ body{margin:0}
   #anorik-refined-studio .x-stats-more .x-btn{width:100%}
 }
 @media(prefers-reduced-motion:reduce){#anorik-refined-studio .x-bar-fill,#anorik-refined-studio .x-bar-num{transition:none}}
+
+/* =====================================================================
+   Apple-style layer: clean white and light-grey surfaces, big centred
+   headlines, frosted header, rounded tiles, scroll reveals. Wine accent.
+   ===================================================================== */
+#anorik-refined-studio{
+  --paper:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--soft:#f5f5f7;
+  --wine:#782f40;--wine-hover:#8c3a4e;--wine-grad:linear-gradient(135deg,#a8475f 0%,#782f40 55%,#4e1d29 100%);
+  --display:-apple-system,BlinkMacSystemFont,'SF Pro Display',Inter,'Noto Sans Georgian',system-ui,sans-serif;
+  --text:-apple-system,BlinkMacSystemFont,'SF Pro Text',Inter,'Noto Sans Georgian',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  background:#fff;color:var(--ink);font-size:17px;line-height:1.5;letter-spacing:-.012em}
+#anorik-refined-studio[data-language=ka]{letter-spacing:0}
+html{background:#fff}
+
+/* type */
+#anorik-refined-studio .x-section-title{font-weight:700;font-size:clamp(36px,5vw,64px);line-height:1.06;letter-spacing:-.035em;text-align:center;max-width:18ch;margin-inline:auto}
+#anorik-refined-studio[data-language=ka] .x-section-title{font-size:clamp(28px,3.4vw,44px);line-height:1.28;letter-spacing:0;max-width:26ch}
+#anorik-refined-studio .x-eyebrow{display:inline-block;margin:0 0 14px;padding:0;background:none;border:0;font-size:19px;font-weight:600;color:var(--wine);letter-spacing:-.01em}
+#anorik-refined-studio[data-language=ka] .x-eyebrow{font-size:17px}
+#anorik-refined-studio .x-eyebrow:before{display:none}
+#anorik-refined-studio .x-grad{background:var(--wine-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* buttons: Apple pills */
+#anorik-refined-studio .x-btn{min-height:46px;padding:12px 24px;border-radius:980px;border:1px solid var(--wine);font-weight:500;font-size:17px;letter-spacing:-.01em;transition:background-color .2s,border-color .2s,color .2s,transform .2s var(--ease)}
+#anorik-refined-studio .x-btn:hover{background:var(--wine-hover);border-color:var(--wine-hover)}
+#anorik-refined-studio .x-btn:active{transform:scale(.97)}
+#anorik-refined-studio .x-btn-ghost{background:transparent;color:var(--wine)}
+#anorik-refined-studio .x-btn-ghost:hover{background:var(--wine);border-color:var(--wine);color:#fff}
+#anorik-refined-studio .x-btn-light{background:#fff;border-color:#fff;color:var(--ink)}
+#anorik-refined-studio .x-btn-light:hover{background:#e8e8ed;border-color:#e8e8ed;color:var(--ink)}
+#anorik-refined-studio .x-btn-small{min-height:32px;padding:5px 14px;font-size:13px;font-weight:500}
+
+/* frosted sticky header */
+#anorik-refined-studio .x-head{position:sticky;top:0;z-index:40;padding:6px 0;background:rgba(255,255,255,.78);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+#anorik-refined-studio .x-head-row{gap:28px;min-height:52px}
+#anorik-refined-studio .x-head .al-logo{height:40px;gap:9px}
+#anorik-refined-studio .x-head .al-logo img.al-brand-mark{width:36px;height:36px;flex-basis:36px;border-radius:10px;padding:5px;box-shadow:none}
+#anorik-refined-studio .x-head .al-brand-type{height:40px;gap:3px}
+#anorik-refined-studio .x-head .al-logo .al-brand-name{font-size:24px;line-height:25px}
+#anorik-refined-studio .x-head .al-logo .al-brand-descriptor{font-size:7.5px;line-height:8px;letter-spacing:3.3px;padding-left:3.3px}
+#anorik-refined-studio .x-nav{gap:30px;font-size:13px;font-weight:400}
+#anorik-refined-studio .x-nav a{color:var(--ink);opacity:.8;border:0;padding:4px 0;transition:opacity .2s,color .2s}
+#anorik-refined-studio .x-nav a:hover{opacity:1}
+#anorik-refined-studio .x-nav a[aria-current]{opacity:1;color:var(--wine)}
+#anorik-refined-studio .x-locale{padding:2px;border:0;background:rgba(0,0,0,.06)}
+#anorik-refined-studio .x-locale a{min-width:34px;min-height:28px;font-size:12px;color:var(--ink);opacity:.7}
+#anorik-refined-studio .x-locale a[aria-current]{background:#fff;color:var(--ink);opacity:1;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+#anorik-refined-studio .x-locale a:not([aria-current]):hover{color:var(--ink);opacity:1}
+
+/* hero: centred, big, calm */
+#anorik-refined-studio .x-hero{padding:96px 0 112px;background:#fff}
+#anorik-refined-studio .x-hero-grid{grid-template-columns:1fr;gap:0;text-align:center}
+#anorik-refined-studio .x-hero-copy{display:flex;flex-direction:column;align-items:center}
+#anorik-refined-studio h1{font-weight:700;font-size:clamp(48px,7.4vw,104px);line-height:1.02;letter-spacing:-.045em;max-width:13ch;margin-inline:auto}
+#anorik-refined-studio[data-language=ka] h1{font-size:clamp(34px,5vw,66px);line-height:1.2;letter-spacing:0;max-width:18ch}
+#anorik-refined-studio .x-lede{margin:28px auto 0;max-width:36em;font-size:clamp(19px,1.7vw,24px);line-height:1.45;color:var(--muted);letter-spacing:-.015em}
+#anorik-refined-studio[data-language=ka] .x-lede{font-size:clamp(17px,1.4vw,20px);line-height:1.65}
+#anorik-refined-studio .x-actions{justify-content:center;gap:14px;margin-top:36px}
+#anorik-refined-studio .x-assure{justify-content:center;font-size:14px}
+#anorik-refined-studio .x-hero-copy>*{animation:x-rise 1s var(--ease) both}
+#anorik-refined-studio .x-hero-copy>:nth-child(2){animation-delay:.08s}
+#anorik-refined-studio .x-hero-copy>:nth-child(3){animation-delay:.16s}
+#anorik-refined-studio .x-hero-copy>:nth-child(4){animation-delay:.24s}
+#anorik-refined-studio .x-hero-copy>:nth-child(5){animation-delay:.3s}
+@keyframes x-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* hero review card: light tile with the address field and button side by side */
+#anorik-refined-studio .x-review{grid-template-columns:minmax(0,1fr) auto;gap:14px 12px;width:100%;max-width:780px;margin:72px auto 0;padding:40px;border-radius:30px;background:var(--soft);color:var(--ink);box-shadow:none;text-align:center}
+#anorik-refined-studio .x-review>*{grid-column:1/-1}
+#anorik-refined-studio .x-review-tag{justify-self:center;background:none;padding:0;color:var(--wine);font-size:14px;font-weight:600}
+#anorik-refined-studio .x-review h2{font-weight:700;font-size:clamp(26px,2.6vw,34px);line-height:1.12;letter-spacing:-.03em;color:var(--ink)}
+#anorik-refined-studio[data-language=ka] .x-review h2{font-size:clamp(22px,2vw,27px);line-height:1.35;letter-spacing:0}
+#anorik-refined-studio .x-review-text{font-size:17px;color:var(--muted);max-width:34em;margin:0 auto 8px}
+#anorik-refined-studio .x-review-field{grid-column:1}
+#anorik-refined-studio .x-review-field input{min-height:54px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:17px;transition:border-color .2s,box-shadow .2s}
+#anorik-refined-studio .x-review-field input::placeholder{color:#a1a1a6}
+#anorik-refined-studio .x-review-field input:focus{border-color:var(--wine);background:#fff;box-shadow:0 0 0 4px rgba(120,47,64,.14)}
+#anorik-refined-studio .x-review .x-btn{grid-column:2;width:auto;min-height:54px;padding-inline:28px;background:var(--wine);border-color:var(--wine);color:#fff}
+#anorik-refined-studio .x-review .x-btn:hover{background:var(--wine-hover);border-color:var(--wine-hover)}
+#anorik-refined-studio .x-review :focus-visible{outline-color:var(--wine)}
+#anorik-refined-studio .x-review-points{grid-template-columns:1fr 1fr;gap:12px 28px;margin-top:14px;padding-top:24px;border-top:1px solid var(--line);text-align:left}
+#anorik-refined-studio .x-review-points li{color:var(--ink);font-size:15px}
+#anorik-refined-studio .x-review-points li:before{background-color:var(--wine)}
+#anorik-refined-studio .x-review-alt{justify-self:center;margin-top:4px;color:var(--wine);font-size:15px;text-decoration:none}
+#anorik-refined-studio .x-review-alt:after{content:' \203A'}
+#anorik-refined-studio .x-review-alt:hover{color:var(--wine-hover);text-decoration:underline}
+
+/* proof numbers */
+#anorik-refined-studio .x-proof{margin-top:88px;border:0;text-align:center;gap:24px}
+#anorik-refined-studio .x-proof>div,#anorik-refined-studio .x-proof>div+div{padding:0;border:0}
+#anorik-refined-studio .x-proof dt{font-weight:700;font-size:clamp(40px,4.4vw,60px);letter-spacing:-.04em;background:var(--wine-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:4px}
+#anorik-refined-studio[data-language=ka] .x-proof dt{font-size:clamp(28px,3vw,40px);letter-spacing:0;line-height:1.25}
+#anorik-refined-studio .x-proof dd{margin:10px auto 0;font-size:15px;color:var(--muted)}
+
+/* section rhythm */
+#anorik-refined-studio .x-pains,#anorik-refined-studio .x-case,#anorik-refined-studio .x-for,#anorik-refined-studio .x-services,#anorik-refined-studio .x-more,#anorik-refined-studio .x-about,#anorik-refined-studio .x-process,#anorik-refined-studio .x-faq,#anorik-refined-studio .x-contact{padding:120px 0;border:0}
+#anorik-refined-studio .x-pains{background:var(--soft)}
+#anorik-refined-studio .x-for{background:#fff}
+#anorik-refined-studio .x-services{background:var(--soft)}
+#anorik-refined-studio .x-more{background:#fff}
+#anorik-refined-studio .x-about{background:#000;color:#f5f5f7}
+#anorik-refined-studio .x-process{background:#fff}
+#anorik-refined-studio .x-faq{background:var(--soft)}
+#anorik-refined-studio .x-contact{background:#fff}
+
+/* chart section */
+#anorik-refined-studio .x-stats-head{text-align:center}
+#anorik-refined-studio .x-stats-head .x-pains-text{margin:24px auto 0;max-width:40em;font-size:19px;line-height:1.5;color:var(--muted)}
+#anorik-refined-studio[data-language=ka] .x-stats-head .x-pains-text{font-size:17px;line-height:1.65}
+#anorik-refined-studio .x-chart{margin-top:64px;padding:56px 48px 36px;border:0;border-radius:30px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.03),0 20px 50px -20px rgba(0,0,0,.08)}
+#anorik-refined-studio .x-bar-col{height:300px;border-bottom:1px solid var(--ink);background:repeating-linear-gradient(to top,transparent 0,transparent calc(20% - 1px),#ececf0 calc(20% - 1px),#ececf0 20%)}
+#anorik-refined-studio .x-bar-fill{left:18%;right:18%;border-radius:14px 14px 4px 4px;background:var(--wine-grad)}
+#anorik-refined-studio .x-bar:nth-child(n+4) .x-bar-fill{background:linear-gradient(135deg,#d39aa8,#a45c6e)}
+#anorik-refined-studio .x-bar-num{font-weight:700;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.035em}
+#anorik-refined-studio .x-bar-label{font-weight:600;font-size:16px;letter-spacing:-.015em}
+#anorik-refined-studio .x-bar-example{color:var(--muted)}
+#anorik-refined-studio .x-chart-note{border-top:1px solid #ececf0;text-align:center}
+#anorik-refined-studio .x-stats-more{grid-template-columns:1fr;justify-items:center;text-align:center;gap:28px;margin-top:88px}
+#anorik-refined-studio .x-stats-more h3{font-weight:700;font-size:clamp(28px,3.2vw,44px);line-height:1.1;letter-spacing:-.035em}
+#anorik-refined-studio[data-language=ka] .x-stats-more h3{font-size:clamp(24px,2.4vw,32px);line-height:1.3;letter-spacing:0}
+#anorik-refined-studio .x-stats-more p{margin:14px auto 0;font-size:19px;max-width:36em}
+#anorik-refined-studio[data-language=ka] .x-stats-more p{font-size:17px;line-height:1.65}
+#anorik-refined-studio .x-stats-more .x-chips{justify-content:center;margin-top:28px}
+#anorik-refined-studio .x-chips a{min-height:38px;padding:8px 18px;border:0;background:#fff;font-weight:500;font-size:15px;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:background-color .2s,color .2s}
+#anorik-refined-studio .x-chips a:hover{background:var(--wine);color:#fff}
+
+/* case study: black, centred, big screenshot */
+#anorik-refined-studio .x-case{background:#000;color:#f5f5f7}
+#anorik-refined-studio .x-case .x-wrap{display:block}
+#anorik-refined-studio .x-case-head{text-align:center}
+#anorik-refined-studio .x-kicker{color:#d38d9e;font-size:17px;font-weight:600;margin-bottom:16px}
+#anorik-refined-studio .x-case h2{font-weight:700;font-size:clamp(32px,4.4vw,56px);line-height:1.08;letter-spacing:-.035em;max-width:22ch;margin-inline:auto}
+#anorik-refined-studio[data-language=ka] .x-case h2{font-size:clamp(26px,3vw,40px);line-height:1.3;letter-spacing:0;max-width:30ch}
+#anorik-refined-studio .x-case-shot{max-width:1040px;margin:64px auto 0}
+#anorik-refined-studio .x-browser{border-radius:22px;box-shadow:0 50px 100px -40px rgba(120,47,64,.55),0 0 0 1px rgba(255,255,255,.08)}
+#anorik-refined-studio .x-browser-bar{background:#2a2a2d;color:#a1a1a6}
+#anorik-refined-studio .x-browser-bar i{background:#4a4a4f}
+#anorik-refined-studio .x-browser-bar span{background:#3a3a3e;color:#d2d2d7}
+#anorik-refined-studio .x-browser img{max-height:none}
+#anorik-refined-studio .x-case-facts{grid-template-columns:repeat(3,1fr);gap:40px;margin-top:72px}
+#anorik-refined-studio .x-case-facts dt{font-size:21px;font-weight:600;color:#fff;margin-bottom:10px}
+#anorik-refined-studio .x-case-facts dd{font-size:16px;line-height:1.6;color:#a1a1a6}
+#anorik-refined-studio .x-case-foot{justify-content:center;margin-top:56px;padding-top:0;border:0}
+#anorik-refined-studio .x-case-link{color:#e9a9b8;text-decoration:none}
+#anorik-refined-studio .x-case-link:after{content:' \203A'}
+#anorik-refined-studio .x-case-link:hover{color:#fff;text-decoration:underline}
+
+/* who it's for: soft tiles */
+#anorik-refined-studio .x-for-list{gap:20px;margin-top:64px}
+#anorik-refined-studio .x-for-list li{padding:36px 32px;background:var(--soft);border:0;border-radius:28px;transition:transform .4s var(--ease)}
+#anorik-refined-studio .x-for-list li:hover{transform:translateY(-4px)}
+#anorik-refined-studio .x-for-list h3{font-weight:700;font-size:24px;letter-spacing:-.025em}
+#anorik-refined-studio[data-language=ka] .x-for-list h3{font-size:20px;letter-spacing:0;line-height:1.35}
+#anorik-refined-studio .x-for-note{text-align:center;margin-top:32px}
+
+/* services: bento grid */
+#anorik-refined-studio .x-service-list{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;margin-top:64px;border:0}
+#anorik-refined-studio .x-service-list li{grid-column:span 2;display:flex;flex-direction:column;gap:14px;padding:40px 36px;min-height:300px;background:#fff;border:0;border-radius:30px;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+#anorik-refined-studio .x-service-list li:nth-child(-n+2){grid-column:span 3}
+#anorik-refined-studio .x-service-list li:hover{transform:translateY(-4px);box-shadow:0 24px 50px -24px rgba(0,0,0,.18)}
+#anorik-refined-studio .x-service-list h3{font-weight:700;font-size:clamp(24px,2.2vw,32px);line-height:1.12;letter-spacing:-.03em}
+#anorik-refined-studio[data-language=ka] .x-service-list h3{font-size:clamp(20px,1.7vw,24px);line-height:1.35;letter-spacing:0}
+#anorik-refined-studio .x-service-list p{font-size:17px;line-height:1.5;color:var(--muted)}
+#anorik-refined-studio .x-service-list a{margin-top:auto;padding-top:12px;font-weight:500;font-size:17px;text-decoration:none;color:var(--wine)}
+#anorik-refined-studio .x-service-list a:after{content:' \203A'}
+#anorik-refined-studio .x-service-list a:hover{text-decoration:underline;text-underline-offset:4px}
+
+/* more projects */
+#anorik-refined-studio .x-projects{margin-top:64px;gap:20px}
+#anorik-refined-studio .x-project{border:0;border-radius:28px;background:var(--soft)}
+#anorik-refined-studio .x-project-art{height:150px}
+#anorik-refined-studio .x-art-jibu{background:var(--wine-grad)}
+#anorik-refined-studio .x-project-body{padding:24px 28px 30px}
+#anorik-refined-studio .x-project h3{font-weight:700;letter-spacing:-.025em}
+#anorik-refined-studio .x-status{background:#fff;border:0}
+#anorik-refined-studio .x-status-active{background:#f3e3e7}
+
+/* about: black statement */
+#anorik-refined-studio .x-about-grid{grid-template-columns:1fr;gap:72px;text-align:center}
+#anorik-refined-studio .x-about .x-section-title{color:#f5f5f7;max-width:20ch}
+#anorik-refined-studio .x-about-text{margin:28px auto 0;max-width:38em;font-size:clamp(19px,1.6vw,22px);line-height:1.55;color:#a1a1a6}
+#anorik-refined-studio[data-language=ka] .x-about-text{font-size:18px;line-height:1.7}
+#anorik-refined-studio .x-about-points{grid-template-columns:repeat(3,1fr);gap:20px}
+#anorik-refined-studio .x-about-points>div{padding:32px 28px;border:0;border-radius:28px;background:#1d1d1f;text-align:left}
+#anorik-refined-studio .x-about-points dt{font-weight:700;font-size:21px;letter-spacing:-.02em;color:#fff}
+#anorik-refined-studio[data-language=ka] .x-about-points dt{letter-spacing:0;font-size:19px}
+#anorik-refined-studio .x-about-points dd{color:#a1a1a6;font-size:16px}
+
+/* process */
+#anorik-refined-studio .x-steps{margin-top:64px;gap:20px}
+#anorik-refined-studio .x-steps li{padding:32px 28px;border:0;border-radius:28px;background:var(--soft)}
+#anorik-refined-studio .x-steps li:before{font-weight:700;font-size:56px;letter-spacing:-.04em;margin-bottom:20px;background:var(--wine-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+#anorik-refined-studio .x-steps h3{font-weight:700;font-size:21px;letter-spacing:-.02em}
+#anorik-refined-studio[data-language=ka] .x-steps h3{letter-spacing:0;font-size:19px;line-height:1.35}
+
+/* faq */
+#anorik-refined-studio .x-faq-grid{grid-template-columns:1fr;gap:56px;max-width:860px}
+#anorik-refined-studio .x-faq-list{border-top:1px solid var(--line)}
+#anorik-refined-studio .x-faq details{border-bottom:1px solid var(--line)}
+#anorik-refined-studio .x-faq summary{padding:24px 0;font-weight:600;font-size:20px;letter-spacing:-.02em}
+#anorik-refined-studio[data-language=ka] .x-faq summary{font-size:18px;letter-spacing:0}
+#anorik-refined-studio .x-faq summary:after{flex-basis:30px;height:30px;background:#fff;color:var(--wine);transition:transform .3s var(--ease)}
+#anorik-refined-studio .x-faq details[open] summary:after{transform:rotate(180deg)}
+#anorik-refined-studio .x-faq details p{color:var(--muted);font-size:17px;padding-bottom:24px}
+#anorik-refined-studio .x-faq details[open] p{animation:x-rise .45s var(--ease) both}
+
+/* contact */
+#anorik-refined-studio .x-contact-grid{gap:64px;align-items:center}
+#anorik-refined-studio .x-contact .x-section-title{text-align:left;margin:0;max-width:14ch}
+#anorik-refined-studio .x-contact-intro>p{font-size:19px;line-height:1.5}
+#anorik-refined-studio[data-language=ka] .x-contact-intro>p{font-size:17px;line-height:1.65}
+#anorik-refined-studio .x-form{padding:40px;border-radius:30px;background:var(--soft)}
+#anorik-refined-studio .x-form input:not([type=radio]),#anorik-refined-studio .x-form textarea{border:1px solid var(--line);background:#fff;font-size:17px;transition:border-color .2s,box-shadow .2s}
+#anorik-refined-studio .x-form input:not([type=radio]):focus,#anorik-refined-studio .x-form textarea:focus{border-color:var(--wine);box-shadow:0 0 0 4px rgba(120,47,64,.14)}
+#anorik-refined-studio .x-form .x-chips span{border:0;background:#fff;font-size:15px;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:background-color .2s,color .2s}
+#anorik-refined-studio .x-form .x-chips input:checked+span{background:var(--ink);color:#fff}
+#anorik-refined-studio #al-inquiry-status{background:#fff}
+
+/* footer */
+#anorik-refined-studio .x-footer{background:var(--soft);border-top:0;padding:32px 0 40px}
+#anorik-refined-studio .x-footer-info{font-size:13px;color:var(--muted)}
+
+/* scroll reveal (class added by app.js only) */
+#anorik-refined-studio.x-anim .x-rv{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease) var(--d,0s),transform 1s var(--ease) var(--d,0s)}
+#anorik-refined-studio.x-anim .x-case-shot.x-rv{transform:translateY(40px) scale(.94)}
+#anorik-refined-studio.x-anim .x-rv.is-in{opacity:1;transform:none}
+
+/* responsive */
+@media(max-width:980px){
+  #anorik-refined-studio .x-head{padding:6px 0 0}
+  #anorik-refined-studio .x-nav-mobile{margin-top:4px;padding-bottom:6px;border:0;gap:2px}
+  #anorik-refined-studio .x-nav-mobile a{padding:6px 12px;border:0;background:none;font-size:13px;color:var(--ink)}
+  #anorik-refined-studio .x-nav-mobile a[aria-current]{background:rgba(120,47,64,.1);color:var(--wine)}
+  #anorik-refined-studio .x-case-facts{grid-template-columns:1fr 1fr}
+  #anorik-refined-studio .x-case-facts>div:last-child{grid-column:1/-1}
+  #anorik-refined-studio .x-service-list{grid-template-columns:1fr 1fr}
+  #anorik-refined-studio .x-service-list li,#anorik-refined-studio .x-service-list li:nth-child(-n+2){grid-column:span 1}
+  #anorik-refined-studio .x-service-list li:first-child{grid-column:1/-1}
+  #anorik-refined-studio .x-about-points{grid-template-columns:1fr}
+  #anorik-refined-studio .x-contact-grid{gap:40px}
+  #anorik-refined-studio .x-contact .x-section-title{max-width:none}
+}
+@media(max-width:700px){
+  #anorik-refined-studio .x-proof{grid-template-columns:1fr;gap:28px;margin-top:64px}
+  #anorik-refined-studio .x-proof>div,#anorik-refined-studio .x-proof>div+div{display:block;padding:0;border:0}
+  #anorik-refined-studio .x-proof dd{margin-top:6px}
+}
+@media(max-width:600px){
+  #anorik-refined-studio{font-size:17px}
+  #anorik-refined-studio .x-hero{padding:56px 0 72px}
+  #anorik-refined-studio h1{font-size:clamp(40px,11.5vw,54px)}
+  #anorik-refined-studio[data-language=ka] h1{font-size:clamp(28px,8vw,36px)}
+  #anorik-refined-studio .x-lede{font-size:19px}
+  #anorik-refined-studio[data-language=ka] .x-lede{font-size:17px}
+  #anorik-refined-studio .x-section-title{font-size:clamp(32px,9vw,40px)}
+  #anorik-refined-studio[data-language=ka] .x-section-title{font-size:clamp(24px,7vw,30px)}
+  #anorik-refined-studio .x-case h2{font-size:clamp(28px,8vw,36px)}
+  #anorik-refined-studio[data-language=ka] .x-case h2{font-size:clamp(23px,6.6vw,28px)}
+  #anorik-refined-studio .x-pains,#anorik-refined-studio .x-case,#anorik-refined-studio .x-for,#anorik-refined-studio .x-services,#anorik-refined-studio .x-more,#anorik-refined-studio .x-about,#anorik-refined-studio .x-process,#anorik-refined-studio .x-faq,#anorik-refined-studio .x-contact{padding:80px 0}
+  #anorik-refined-studio .x-review{grid-template-columns:1fr;margin-top:48px;padding:28px 20px;border-radius:24px}
+  #anorik-refined-studio .x-review .x-btn{grid-column:1;width:100%}
+  #anorik-refined-studio .x-review-points{grid-template-columns:1fr}
+  #anorik-refined-studio .x-chart{margin-top:40px;padding:24px 18px 18px;border-radius:24px}
+  #anorik-refined-studio .x-bar-col{height:12px;border:0;background:#ececf0}
+  #anorik-refined-studio .x-stats-more{margin-top:56px}
+  #anorik-refined-studio .x-case-shot{margin-top:40px}
+  #anorik-refined-studio .x-browser{border-radius:16px}
+  #anorik-refined-studio .x-case-facts{grid-template-columns:1fr;gap:28px;margin-top:48px}
+  #anorik-refined-studio .x-case-foot{flex-direction:column;margin-top:40px}
+  #anorik-refined-studio .x-for-list,#anorik-refined-studio .x-service-list,#anorik-refined-studio .x-projects,#anorik-refined-studio .x-steps{margin-top:40px;gap:14px}
+  #anorik-refined-studio .x-service-list{grid-template-columns:1fr}
+  #anorik-refined-studio .x-service-list li{min-height:0;padding:30px 24px;border-radius:24px}
+  #anorik-refined-studio .x-for-list li,#anorik-refined-studio .x-steps li,#anorik-refined-studio .x-about-points>div{padding:26px 22px;border-radius:24px}
+  #anorik-refined-studio .x-steps{grid-template-columns:1fr}
+  #anorik-refined-studio .x-steps li:before{font-size:44px;margin-bottom:12px}
+  #anorik-refined-studio .x-project{border-radius:24px}
+  #anorik-refined-studio .x-about-grid{gap:48px}
+  #anorik-refined-studio .x-faq-grid{gap:32px}
+  #anorik-refined-studio .x-faq summary{padding:20px 0;font-size:18px}
+  #anorik-refined-studio .x-form{padding:24px 18px;border-radius:24px}
+  #anorik-refined-studio .x-mobile-bar{background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-top:1px solid rgba(0,0,0,.08)}
+  #anorik-refined-studio .x-mobile-bar .x-btn{min-height:46px}
+  #anorik-refined-studio .x-mobile-bar .x-btn-ghost{background:#fff}
+}
+@media(prefers-reduced-motion:reduce){
+  #anorik-refined-studio.x-anim .x-rv{opacity:1;transform:none;transition:none}
+  #anorik-refined-studio .x-hero-copy>*{animation:none}
+}
+#anorik-refined-studio .x-proof dt{font-size:clamp(36px,3.6vw,52px);white-space:nowrap}
+@media(max-width:700px){#anorik-refined-studio .x-proof dt{white-space:normal}}
+@media(max-width:600px){
+  #anorik-refined-studio .x-eyebrow{font-size:15px}
+  #anorik-refined-studio[data-language=ka] .x-eyebrow{font-size:14px}
+  #anorik-refined-studio .x-mobile-bar{transition:transform .45s var(--ease),opacity .3s}
+  #anorik-refined-studio.x-bar-hidden .x-mobile-bar{transform:translateY(110%);opacity:0;pointer-events:none}
+}
+#anorik-refined-studio .x-head{background:rgba(255,255,255,.92)}

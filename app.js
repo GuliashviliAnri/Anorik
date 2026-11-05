@@ -77,3 +77,31 @@ if(reduce||!('IntersectionObserver' in window)){sec.classList.add('is-in');retur
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){sec.classList.add('is-in');countUp();io.disconnect();}});},{threshold:.35});
 io.observe(sec.querySelector('.x-chart'));
 })();
+
+// Apple-style scroll reveal: fade and lift blocks into view, staggered within each group.
+(function(){
+ const root=document.getElementById('anorik-refined-studio');
+ if(!root||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+ const sel='.x-proof>div,.x-section-title,.x-stats-head,.x-chart,.x-stats-more,.x-case-head,.x-case-shot,.x-case-facts>div,.x-case-foot,.x-for-list>li,.x-for-note,.x-service-list>li,.x-project,.x-about-text,.x-about-points>div,.x-steps>li,.x-faq-list,.x-contact-intro,.x-form';
+ const items=[...root.querySelectorAll(sel)].filter(el=>!el.closest('.x-stats-head')||el.classList.contains('x-stats-head'));
+ items.forEach(el=>{
+  const sibs=[...el.parentElement.children].filter(c=>items.includes(c));
+  const i=sibs.indexOf(el);
+  if(sibs.length>1)el.style.setProperty('--d',(Math.min(i,5)*90)+'ms');
+  el.classList.add('x-rv');
+ });
+ root.classList.add('x-anim');
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px',threshold:.12});
+ items.forEach(el=>{
+  // Anything already on screen at load appears straight away.
+  if(el.getBoundingClientRect().top<innerHeight*.92)el.classList.add('is-in');else io.observe(el);
+ });
+})();
+
+// Mobile quick-contact bar: stay out of the way until the hero buttons have scrolled off.
+(function(){
+ const root=document.getElementById('anorik-refined-studio');const acts=root&&root.querySelector('.x-hero .x-actions');
+ if(!acts)return;let f=0;
+ function upd(){f=0;root.classList.toggle('x-bar-hidden',acts.getBoundingClientRect().bottom>0);}
+ addEventListener('scroll',()=>{if(!f)f=requestAnimationFrame(upd)},{passive:true});upd();
+})();
