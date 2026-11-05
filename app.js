@@ -162,27 +162,32 @@ io.observe(sec.querySelector('.x-chart'));
  addEventListener('scroll',()=>{if(!f)f=requestAnimationFrame(upd)},{passive:true});upd();
 })();
 
-// ANORIK wordmark: letters flick through typefaces, then settle (on load and on hover).
+// ANORIK wordmark: the wine O flicks through typefaces, then settles (first visit in a session, and on hover).
 (function(){
  const root=document.getElementById('anorik-refined-studio');if(!root)return;
- const pool=['abril','archivo','bebas','bodoni','cinzel','cormorant','dmserif','fraunces','grotesk','italiana','majormono','monoton','playfair','plexserif','righteous','rubikmono','syne','unbounded'];
- const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const pool=['abril','archivo','bebas','bodoni','cinzel','cormorant','dmserif','grotesk','italiana','majormono','monoton','playfair','plexserif','righteous','rubikmono','syne','unbounded'];
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
  root.querySelectorAll('.al-brand-name').forEach(name=>{
-  const letters=[...name.children];let busy=false;
+  const o=name.querySelector('.al-letter-o');if(!o)return;let busy=false;
   function shuffle(){
-   if(busy||reduce)return;busy=true;name.classList.add('is-shuffling');
-   const t0=performance.now();let last=0;
-   // Keep every letter in its final-width box so the header doesn't jump while fonts flick.
-   letters.forEach(l=>{l.style.width=l.offsetWidth+'px';l.classList.remove('is-set');});
+   if(busy)return;busy=true;o.style.width=o.offsetWidth+'px';o.style.display='inline-flex';o.style.justifyContent='center';
+   o.classList.remove('is-set');name.classList.add('is-shuffling');const t0=performance.now();let last=0;
    (function step(t){
-    if(t-last>70){last=t;letters.forEach((l,i)=>{if(!l.classList.contains('is-set'))l.style.fontFamily="'wm-"+pool[Math.random()*pool.length|0]+"'";});}
-    letters.forEach((l,i)=>{if(!l.classList.contains('is-set')&&t-t0>600+i*140){l.style.fontFamily='';l.classList.add('is-set');}});
-    if(letters.every(l=>l.classList.contains('is-set'))){letters.forEach(l=>l.style.width='');name.classList.remove('is-shuffling');busy=false;return;}
+    if(t-t0>900){name.classList.remove('is-shuffling');o.style.removeProperty('--wm-f');o.style.width='';o.style.display='';o.style.justifyContent='';o.classList.add('is-set');busy=false;return;}
+    if(t-last>75){last=t;o.style.setProperty('--wm-f',"'wm-"+pool[Math.random()*pool.length|0]+"'");}
     requestAnimationFrame(step);
    })(t0);
   }
+  if(name.closest('.x-head')){let seen=false;try{seen=sessionStorage.getItem('anorik-wm')==='1';sessionStorage.setItem('anorik-wm','1')}catch(e){}
+   if(!seen)(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(shuffle,300));}
   const logo=name.closest('.al-logo');
-  if(name.closest('.x-head'))(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(shuffle,200));
   if(logo&&matchMedia('(hover:hover)').matches)logo.addEventListener('mouseenter',shuffle);
  });
 })();
+
+// Logo goes back to the top (the header is sticky, so a plain #al-top link no longer scrolls).
+document.querySelectorAll('#anorik-refined-studio a.al-logo').forEach(a=>a.addEventListener('click',e=>{
+ e.preventDefault();
+ scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+ if(location.hash)history.replaceState(null,'',location.pathname+location.search);
+}));

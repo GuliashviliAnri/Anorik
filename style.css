@@ -896,3 +896,23 @@ html{background:#fff}
 #anorik-refined-studio.x-head-dark .x-head .al-brand-name .al-letter-o{color:#e9a9b8}
 #anorik-refined-studio .al-logo .al-brand-descriptor{font-family:Inter,var(--text);font-weight:600}
 #anorik-refined-studio .al-brand-name.is-shuffling>span{white-space:nowrap;overflow:visible;display:inline-flex;justify-content:center}
+
+/* ===== Wordmark v2: clean ANORIK with a wine O, no icon box ===== */
+#anorik-refined-studio .al-logo{gap:0;height:auto}
+#anorik-refined-studio .al-brand-type{height:auto;gap:5px;align-items:center}
+#anorik-refined-studio .al-brand-name{gap:0;font-size:24px;line-height:1;letter-spacing:0}
+#anorik-refined-studio .al-brand-name>span{font-family:Inter,var(--text)!important;font-weight:700;font-style:normal;font-size:1em;min-width:0;margin-right:.13em;color:var(--ink)}
+#anorik-refined-studio .al-brand-name>span:last-child{margin-right:0}
+#anorik-refined-studio .al-brand-name .al-letter-o{font-family:'wm-fraunces',Georgia,serif!important;font-weight:400;font-size:1.06em;color:var(--wine)}
+#anorik-refined-studio .al-brand-name.is-shuffling .al-letter-o{font-family:var(--wm-f,'wm-fraunces'),Georgia,serif!important}
+#anorik-refined-studio .al-logo .al-brand-descriptor{font-size:8px;line-height:9px;letter-spacing:.62em;padding-left:.62em;font-weight:600;color:var(--wine);text-align:center;width:100%}
+#anorik-refined-studio .x-head .al-logo .al-brand-name{font-size:23px;line-height:24px}
+#anorik-refined-studio .x-footer .al-logo .al-brand-name,#anorik-refined-studio .al-footer .al-logo .al-brand-name{font-size:21px;line-height:22px}
+#anorik-refined-studio.x-head-dark .x-head .al-brand-name>span{color:#f5f5f7}
+#anorik-refined-studio.x-head-dark .x-head .al-brand-name .al-letter-o{color:#e9a9b8}
+#anorik-refined-studio.x-head-dark .x-head .al-brand-descriptor{color:#d38d9e}
+#anorik-refined-studio .al-brand-name .al-letter-o.is-set{animation:wm-set .4s var(--ease,ease) both}
+@media(max-width:520px){#anorik-refined-studio .x-head .al-logo .al-brand-name{font-size:22px}}
+@media(min-width:981px){#anorik-refined-studio .x-head .al-logo .al-brand-name{font-size:26px;line-height:27px}#anorik-refined-studio .x-head .al-logo .al-brand-descriptor{font-size:8.5px}}
+#anorik-refined-studio .al-brand-name>span[class]{font-weight:700!important;font-size:1em}
+#anorik-refined-studio .al-brand-name>span.al-letter-o{font-weight:400!important;font-size:1.06em}
