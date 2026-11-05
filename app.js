@@ -62,3 +62,18 @@ form.addEventListener('submit',async e=>{
 
 updateNav();
 })();
+
+// Problems chart: grow the bars and count up the numbers when the chart scrolls into view.
+(function(){
+const sec=document.querySelector('.x-stats');
+if(!sec)return;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const nums=[...sec.querySelectorAll('.x-bar-num')];
+function countUp(){nums.forEach((el,i)=>{const target=+el.dataset.value,start=performance.now()+i*110+300,dur=900;
+ el.textContent='0%';
+ function tick(t){const k=Math.min(1,Math.max(0,(t-start)/dur));el.textContent=Math.round(target*(1-Math.pow(1-k,3)))+'%';if(k<1)requestAnimationFrame(tick);}
+ requestAnimationFrame(tick);});}
+if(reduce||!('IntersectionObserver' in window)){sec.classList.add('is-in');return;}
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){sec.classList.add('is-in');countUp();io.disconnect();}});},{threshold:.35});
+io.observe(sec.querySelector('.x-chart'));
+})();
