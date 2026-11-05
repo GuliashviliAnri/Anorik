@@ -43,9 +43,7 @@ SERVICES = {
     "ka": ["ვებსაიტის დიზაინი და დეველოპმენტი", "ონლაინ მაღაზიები", "გაშვება და მარკეტინგი", "ბიზნესსისტემები და ადმინპანელები", "AI აგენტები და ბიზნესის ავტომატიზაცია", "ვებსაიტის მოვლა და გაუმჯობესება"],
 }
 
-FONTS = ("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700"
-         "&family=Cinzel+Decorative:wght@700"
-         "&family=Marcellus&family=Cormorant+SC:wght@600&family=Forum&family=Prata&family=Cinzel:wght@500&display=swap")
+FONTS = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
 
 
 def schema(lang):

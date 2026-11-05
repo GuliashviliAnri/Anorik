@@ -860,3 +860,39 @@ html{background:#fff}
   #anorik-refined-studio .x-bar-col{height:12px;border:0;border-radius:999px;background:#ececf0;overflow:visible}
   #anorik-refined-studio .x-bar-fill{left:0;right:auto;top:0;bottom:0;height:auto;width:calc(var(--v) * 1%);border-radius:999px}
 }
+
+/* ===== ANORIK wordmark: every letter its own typeface, equal cap height ===== */
+@font-face{font-family:'wm-abril';src:url('/assets/wordmark/abril.woff') format('woff');font-display:swap;size-adjust:100.0%}
+@font-face{font-family:'wm-archivo';src:url('/assets/wordmark/archivo.woff') format('woff');font-display:swap;size-adjust:101.7%}
+@font-face{font-family:'wm-bebas';src:url('/assets/wordmark/bebas.woff') format('woff');font-display:swap;size-adjust:100.0%}
+@font-face{font-family:'wm-bodoni';src:url('/assets/wordmark/bodoni.woff') format('woff');font-display:swap;size-adjust:93.3%}
+@font-face{font-family:'wm-cinzel';src:url('/assets/wordmark/cinzel.woff') format('woff');font-display:swap;size-adjust:83.5%}
+@font-face{font-family:'wm-cormorant';src:url('/assets/wordmark/cormorant.woff') format('woff');font-display:swap;size-adjust:112.0%}
+@font-face{font-family:'wm-dmserif';src:url('/assets/wordmark/dmserif.woff') format('woff');font-display:swap;size-adjust:106.1%}
+@font-face{font-family:'wm-fraunces';src:url('/assets/wordmark/fraunces.woff') format('woff');font-display:swap;size-adjust:100.0%}
+@font-face{font-family:'wm-grotesk';src:url('/assets/wordmark/grotesk.woff') format('woff');font-display:swap;size-adjust:100.0%}
+@font-face{font-family:'wm-italiana';src:url('/assets/wordmark/italiana.woff') format('woff');font-display:swap;size-adjust:100.0%}
+@font-face{font-family:'wm-majormono';src:url('/assets/wordmark/majormono.woff') format('woff');font-display:swap;size-adjust:100.4%}
+@font-face{font-family:'wm-monoton';src:url('/assets/wordmark/monoton.woff') format('woff');font-display:swap;size-adjust:86.5%}
+@font-face{font-family:'wm-playfair';src:url('/assets/wordmark/playfair.woff') format('woff');font-display:swap;size-adjust:92.8%}
+@font-face{font-family:'wm-plexserif';src:url('/assets/wordmark/plexserif.woff') format('woff');font-display:swap;size-adjust:100.3%}
+@font-face{font-family:'wm-righteous';src:url('/assets/wordmark/righteous.woff') format('woff');font-display:swap;size-adjust:100.0%}
+@font-face{font-family:'wm-rubikmono';src:url('/assets/wordmark/rubikmono.woff') format('woff');font-display:swap;size-adjust:100.0%}
+@font-face{font-family:'wm-syne';src:url('/assets/wordmark/syne.woff') format('woff');font-display:swap;size-adjust:109.4%}
+@font-face{font-family:'wm-unbounded';src:url('/assets/wordmark/unbounded.woff') format('woff');font-display:swap;size-adjust:93.3%}
+#anorik-refined-studio .al-brand-name{display:flex;align-items:baseline;gap:.04em;font-size:30px;line-height:1;letter-spacing:0;color:var(--ink)}
+#anorik-refined-studio .al-brand-name>span{display:inline-block;font-weight:400;font-style:normal;font-size:1em;line-height:1;min-width:.5em;text-align:center}
+#anorik-refined-studio .al-brand-name .al-letter-a{font-family:'wm-abril',Georgia,serif}
+#anorik-refined-studio .al-brand-name .al-letter-n{font-family:'wm-archivo',Inter,sans-serif}
+#anorik-refined-studio .al-brand-name .al-letter-o{font-family:'wm-fraunces',Georgia,serif;color:var(--wine)}
+#anorik-refined-studio .al-brand-name .al-letter-r{font-family:'wm-bebas',Inter,sans-serif;font-size:1.06em}
+#anorik-refined-studio .al-brand-name .al-letter-i{font-family:'wm-dmserif',Georgia,serif;font-size:1.04em}
+#anorik-refined-studio .al-brand-name .al-letter-k{font-family:'wm-unbounded',Inter,sans-serif}
+#anorik-refined-studio .al-brand-name.is-shuffling>span{color:var(--ink)}
+#anorik-refined-studio .al-brand-name>span.is-set{animation:wm-set .35s var(--ease,ease) both}
+@keyframes wm-set{0%{transform:scale(1.18)}100%{transform:none}}
+#anorik-refined-studio .x-head .al-logo .al-brand-name{font-size:27px;line-height:28px}
+#anorik-refined-studio .x-footer .al-logo .al-brand-name,#anorik-refined-studio .al-footer .al-logo .al-brand-name{font-size:24px;line-height:25px;gap:.04em}
+#anorik-refined-studio.x-head-dark .x-head .al-brand-name .al-letter-o{color:#e9a9b8}
+#anorik-refined-studio .al-logo .al-brand-descriptor{font-family:Inter,var(--text);font-weight:600}
+#anorik-refined-studio .al-brand-name.is-shuffling>span{white-space:nowrap;overflow:visible;display:inline-flex;justify-content:center}
