@@ -73,15 +73,15 @@ function countUp(){nums.forEach((el,i)=>{const target=+el.dataset.value,start=pe
  el.textContent='0%';
  function tick(t){const k=Math.min(1,Math.max(0,(t-start)/dur));el.textContent=Math.round(target*(1-Math.pow(1-k,3)))+'%';if(k<1)requestAnimationFrame(tick);}
  requestAnimationFrame(tick);});}
-if(reduce||!('IntersectionObserver' in window)){sec.classList.add('is-in');return;}
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){sec.classList.add('is-in');countUp();io.disconnect();}});},{threshold:.35});
+if(!('IntersectionObserver' in window)){sec.classList.add('is-in');return;}
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){sec.classList.add('is-in');countUp();io.disconnect();}});},{threshold:0,rootMargin:'0px 0px -25% 0px'});
 io.observe(sec.querySelector('.x-chart'));
 })();
 
 // Apple-style scroll reveal: fade and lift blocks into view, staggered within each group.
 (function(){
  const root=document.getElementById('anorik-refined-studio');
- if(!root||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+ if(!root||!('IntersectionObserver' in window))return;
  const sel='.x-proof>div,.x-section-title,.x-stats-head,.x-chart,.x-stats-more,.x-case-head,.x-case-facts>div,.x-case-foot,.x-for-list>li,.x-for-note,.x-service-list>li,.x-project,.x-about-text,.x-about-points>div,.x-faq-list,.x-contact-intro,.x-form';
  const items=[...root.querySelectorAll(sel)].filter(el=>!el.closest('.x-stats-head')||el.classList.contains('x-stats-head'));
  items.forEach(el=>{
@@ -109,7 +109,8 @@ io.observe(sec.querySelector('.x-chart'));
 // ===== Scroll-driven motion (Apple style) =====
 (function(){
  const root=document.getElementById('anorik-refined-studio');
- if(!root||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ if(!root)return;
+ const calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
  root.classList.add('x-motion');
  const clamp=v=>Math.max(0,Math.min(1,v));
  const ease=t=>1-Math.pow(1-t,3);
@@ -121,12 +122,12 @@ io.observe(sec.querySelector('.x-chart'));
  const h1=root.querySelector('.x-hero h1');
  if(h1){h1.setAttribute('aria-label',h1.textContent.trim());words(h1,'x-w');h1.classList.add('x-words');}
  // 2. Case study screenshot grows to full size as it scrolls in.
- const shot=root.querySelector('.x-case-shot');
+ const shot=calm?null:root.querySelector('.x-case-shot');
  // 3. About statement lights up word by word while scrolling.
  const about=root.querySelector('.x-about-text');const aw=about?words(about,'x-aw'):[];
  // 4. Process: a progress line fills and each step lights up in turn.
  const steps=root.querySelector('.x-steps');const stepItems=steps?[...steps.children]:[];
- const heroCopy=root.querySelector('.x-hero-copy');
+ const heroCopy=calm?null:root.querySelector('.x-hero-copy');
  let f=0;
  function tick(){
   f=0;const vh=innerHeight;
@@ -162,11 +163,10 @@ io.observe(sec.querySelector('.x-chart'));
  addEventListener('scroll',()=>{if(!f)f=requestAnimationFrame(upd)},{passive:true});upd();
 })();
 
-// ANORIK wordmark: the wine O flicks through typefaces, then settles (first visit in a session, and on hover).
+// ANORIK wordmark: the wine O flicks through typefaces, then settles (on every page load, and on hover).
 (function(){
  const root=document.getElementById('anorik-refined-studio');if(!root)return;
  const pool=['abril','archivo','bebas','bodoni','cinzel','cormorant','dmserif','grotesk','italiana','majormono','monoton','playfair','plexserif','righteous','rubikmono','syne','unbounded'];
- if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
  root.querySelectorAll('.al-brand-name').forEach(name=>{
   const o=name.querySelector('.al-letter-o');if(!o)return;let busy=false;
   function shuffle(){
@@ -178,8 +178,7 @@ io.observe(sec.querySelector('.x-chart'));
     requestAnimationFrame(step);
    })(t0);
   }
-  if(name.closest('.x-head')){let seen=false;try{seen=sessionStorage.getItem('anorik-wm')==='1';sessionStorage.setItem('anorik-wm','1')}catch(e){}
-   if(!seen)(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(shuffle,300));}
+  if(name.closest('.x-head'))(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(shuffle,300));
   const logo=name.closest('.al-logo');
   if(logo&&matchMedia('(hover:hover)').matches)logo.addEventListener('mouseenter',shuffle);
  });

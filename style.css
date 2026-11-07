@@ -225,7 +225,6 @@ body{margin:0}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  #anorik-refined-studio *{animation:none!important;transition:none!important}
 }
 
 /* compact pass: less scrolling */
@@ -510,7 +509,7 @@ body{margin:0}
   #anorik-refined-studio .x-bar-example{margin-top:8px}
   #anorik-refined-studio .x-stats-more .x-btn{width:100%}
 }
-@media(prefers-reduced-motion:reduce){#anorik-refined-studio .x-bar-fill,#anorik-refined-studio .x-bar-num{transition:none}}
+
 
 /* =====================================================================
    Apple-style layer: clean white and light-grey surfaces, big centred
@@ -795,10 +794,7 @@ html{background:#fff}
   #anorik-refined-studio .x-mobile-bar .x-btn{min-height:46px}
   #anorik-refined-studio .x-mobile-bar .x-btn-ghost{background:#fff}
 }
-@media(prefers-reduced-motion:reduce){
-  #anorik-refined-studio.x-anim .x-rv{opacity:1;transform:none;transition:none}
-  #anorik-refined-studio .x-hero-copy>*{animation:none}
-}
+
 #anorik-refined-studio .x-proof dt{font-size:clamp(36px,3.6vw,52px);white-space:nowrap}
 @media(max-width:700px){#anorik-refined-studio .x-proof dt{white-space:normal}}
 @media(max-width:600px){
@@ -916,3 +912,21 @@ html{background:#fff}
 @media(min-width:981px){#anorik-refined-studio .x-head .al-logo .al-brand-name{font-size:26px;line-height:27px}#anorik-refined-studio .x-head .al-logo .al-brand-descriptor{font-size:8.5px}}
 #anorik-refined-studio .al-brand-name>span[class]{font-weight:700!important;font-size:1em}
 #anorik-refined-studio .al-brand-name>span.al-letter-o{font-weight:400!important;font-size:1.06em}
+
+/* ===== Calm mode: visitors who turned off animations in their system (Windows "Animation effects",
+   macOS "Reduce motion") still get soft fades, the count-up and the logo, but nothing slides, zooms or blurs. ===== */
+@keyframes x-fade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){
+  #anorik-refined-studio.x-anim .x-rv,#anorik-refined-studio.x-anim .x-chart.x-rv,#anorik-refined-studio.x-anim .x-section-title.x-rv,#anorik-refined-studio.x-anim .x-case-head.x-rv,#anorik-refined-studio.x-anim .x-stats-head.x-rv{transform:none!important;filter:none!important;transition:opacity .8s ease var(--d,0s)!important}
+  #anorik-refined-studio .x-hero-copy>*{animation-name:x-fade}
+  #anorik-refined-studio .x-w{filter:none;transform:none;animation-name:x-fade}
+  #anorik-refined-studio .x-bar-fill{transform:none!important;opacity:0;transition:opacity .8s ease calc(var(--i) * 110ms)!important}
+  #anorik-refined-studio .x-stats.is-in .x-bar-fill{opacity:1}
+  #anorik-refined-studio .x-bar-num{transform:none!important}
+  #anorik-refined-studio.x-motion .x-steps li:not(.on){transform:none}
+  #anorik-refined-studio .x-for-list li:hover,#anorik-refined-studio .x-service-list li:hover{transform:none}
+}
+/* tablets: two columns for the audience cards instead of one long stack */
+@media(min-width:601px) and (max-width:980px){
+  #anorik-refined-studio .x-for-list{grid-template-columns:1fr 1fr}
+}

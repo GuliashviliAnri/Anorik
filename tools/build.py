@@ -126,10 +126,18 @@ def main():
     ka_body = to_georgian(body)
     ka_body = ka_body.replace('data-language="en" lang="en"', 'data-language="ka" lang="ka"', 1)
     ka_body = re.sub(r'(src|href)="assets/', r'\1="/assets/', ka_body)
-    ka_body = ka_body.replace('src="app.js"', 'src="/app.js"')
+    ka_body = re.sub(r'(src|href)="(app\.js|style\.css)', r'\1="/\2', ka_body)
     ka_body = ka_body.replace('data-language-button="ka"', 'data-language-button="ka" aria-current="true"')
     (ROOT / "ka").mkdir(exist_ok=True)
     (ROOT / "ka" / "index.html").write_text('<!doctype html>\n<html lang="ka">' + head("ka", "/") + ka_body, encoding="utf-8")
+    # Cache busting: a new style.css or app.js gets a new URL, so returning visitors never mix old and new files.
+    import hashlib
+    for page in (ROOT / "index.html", ROOT / "ka" / "index.html"):
+        text = page.read_text(encoding="utf-8")
+        for name in ("style.css", "app.js"):
+            v = hashlib.md5((ROOT / name).read_bytes()).hexdigest()[:8]
+            text = re.sub(r'((?:href|src)="/?)' + re.escape(name) + r'(?:\?v=\w+)?"', lambda m: f'{m.group(1)}{name}?v={v}"', text)
+        page.write_text(text, encoding="utf-8")
     print("built index.html and ka/index.html")
 
 
