@@ -125,7 +125,16 @@ io.observe(sec.querySelector('.x-chart'));
  // (html.x-js-wait comes from the inline <head> script, which also lifts it after 1.2s whatever happens here.)
  // Laying the hero out now makes the browser request exactly the fonts it uses, which fonts.ready then waits for.
  const hero=root.querySelector('.x-hero-copy');if(hero)void hero.offsetWidth;
- (document.fonts?document.fonts.ready:Promise.resolve()).catch(()=>{}).then(()=>requestAnimationFrame(()=>document.documentElement.classList.remove('x-js-wait')));
+ // Also wait until the page has really been painted: some browsers (Safari) hold the first paint while animations
+ // already run, so the visitor would only catch the end of the entrance.
+ const painted=new Promise(done=>{
+  const seen=()=>performance.getEntriesByType&&performance.getEntriesByType('paint').some(e=>e.name==='first-contentful-paint');
+  if(seen())return done();
+  try{const po=new PerformanceObserver(l=>{if(l.getEntries().some(e=>e.name==='first-contentful-paint')){po.disconnect();done();}});po.observe({type:'paint',buffered:true});}
+  catch(e){requestAnimationFrame(()=>requestAnimationFrame(done));}
+ });
+ Promise.all([painted,(document.fonts?document.fonts.ready:Promise.resolve()).catch(()=>{})])
+  .then(()=>requestAnimationFrame(()=>document.documentElement.classList.remove('x-js-wait')));
  // 2. Case study screenshot grows to full size as it scrolls in.
  const shot=calm?null:root.querySelector('.x-case-shot');
  // 3. About statement lights up word by word while scrolling.

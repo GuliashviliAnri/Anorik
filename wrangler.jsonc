@@ -8,5 +8,7 @@
     "run_worker_first": ["/api/*"]
   },
   "vars": { "CONTACT_TO": "contact@anorik.com" },
+  // Branch/PR builds run `wrangler preview`, which reads its own settings from here.
+  "previews": { "vars": { "CONTACT_TO": "contact@anorik.com" } },
   "observability": { "enabled": true }
 }
