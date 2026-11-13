@@ -121,6 +121,11 @@ io.observe(sec.querySelector('.x-chart'));
  // 1. Hero headline: words sharpen into place one by one.
  const h1=root.querySelector('.x-hero h1');
  if(h1){h1.setAttribute('aria-label',h1.textContent.trim());words(h1,'x-w');h1.classList.add('x-words');}
+ // Start the entrance only once the hero's fonts are in, so it plays in the final typeface on a first visit too.
+ // (html.x-js-wait comes from the inline <head> script, which also lifts it after 1.2s whatever happens here.)
+ // Laying the hero out now makes the browser request exactly the fonts it uses, which fonts.ready then waits for.
+ const hero=root.querySelector('.x-hero-copy');if(hero)void hero.offsetWidth;
+ (document.fonts?document.fonts.ready:Promise.resolve()).catch(()=>{}).then(()=>requestAnimationFrame(()=>document.documentElement.classList.remove('x-js-wait')));
  // 2. Case study screenshot grows to full size as it scrolls in.
  const shot=calm?null:root.querySelector('.x-case-shot');
  // 3. About statement lights up word by word while scrolling.

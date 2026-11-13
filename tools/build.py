@@ -45,6 +45,19 @@ SERVICES = {
 
 FONTS = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
 
+# Hero entrance: hide the hero copy (opacity only, no layout change) until app.js has split the
+# headline into words and the hero fonts are in, so the first visit plays the same entrance as a
+# cached visit. Visitors without JS never get the class. Hard cap: 1.2s after the HTML is parsed.
+HERO_WAIT = ("<script>(function(c){c.add('x-js-wait');addEventListener('DOMContentLoaded',function(){"
+             "setTimeout(function(){c.remove('x-js-wait')},1200)})})(document.documentElement.classList)</script>")
+
+# The Georgian page's text font is self-hosted; preload it so it is not discovered only after style.css.
+PRELOAD = {
+    "en": "",
+    "ka": '<link rel="preload" href="/assets/georgian-600.ttf" as="font" type="font/ttf" crossorigin>'
+          '<link rel="preload" href="/assets/georgian-400.ttf" as="font" type="font/ttf" crossorigin>',
+}
+
 
 def schema(lang):
     m = META[lang]
@@ -89,6 +102,7 @@ def head(lang, prefix):
     m = META[lang]
     e = lambda s: html.escape(s, quote=True)
     return f"""<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff">
+{HERO_WAIT}
 <title>{e(m['title'])}</title>
 <meta name="description" content="{e(m['description'])}">
 <link rel="canonical" href="{m['url']}">
@@ -98,7 +112,7 @@ def head(lang, prefix):
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(m['og_title'])}"><meta name="twitter:description" content="{e(m['og_description'])}"><meta name="twitter:image" content="{SITE}/assets/og-image.png">
 <script type="application/ld+json">{schema(lang)}</script>
 <link rel="icon" href="{prefix}assets/favicon.svg?v=3" type="image/svg+xml"><link rel="apple-touch-icon" href="{prefix}assets/favicon-180.png?v=3">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="{FONTS}"><link rel="stylesheet" href="{prefix}style.css"></head>"""
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>{PRELOAD[lang]}<link rel="stylesheet" href="{FONTS}"><link rel="stylesheet" href="{prefix}style.css"></head>"""
 
 
 LEAF = re.compile(r'<(\w+)([^<>]*?)\sdata-en="([^"]*)" data-ka="([^"]*)"([^<>]*)>(.*?)</\1>', re.S)
